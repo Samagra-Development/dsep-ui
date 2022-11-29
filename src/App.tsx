@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
+import "./index.css";
 import io from "socket.io-client";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";

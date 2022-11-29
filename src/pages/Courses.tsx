@@ -31,7 +31,7 @@ const Courses = (props: any) => {
     };
   }, []);
 
-  return showData && <JsonToTable json={data} />;
+  return <>{showData && <JsonToTable json={data} />}</>;
 };
 
 export default Courses;
