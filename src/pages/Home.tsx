@@ -7,10 +7,10 @@ const Home = (props: any) => {
   const navigate = useNavigate();
   const FILTERS = [
     "provider",
-    "courseMode",
-    "courseDuration",
-    "courseCredits",
-    "courseCategory",
+    "course_mode",
+    "course_duration",
+    "course_credits",
+    "course_category",
     "query",
   ];
 
@@ -34,6 +34,7 @@ const Home = (props: any) => {
   }, []);
 
   const handleSubmit = () => {
+    console.log({ filters });
     props.socket.emit("search", filters);
     navigate("/courses");
   };
