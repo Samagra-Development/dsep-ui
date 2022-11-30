@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
 
-const socket = io("http://localhost:5003");
+const socket = io("https://api.dsep.samagra.io");
 
 function App() {
   return (
