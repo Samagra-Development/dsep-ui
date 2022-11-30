@@ -60,7 +60,7 @@ const Courses = (props: any) => {
             <div className="text-4xl font-medium min-w-[1024px] mx-auto">
               Search results for{" "}
               <span className="block bg-gray-200 rounded px-3 py-1 text-sm font-medium w-[95px] text-gray-700 mr-2 mb-2 mt-4">
-                {data?.data?.courseList?.edges?.length} courses
+                {data?.catalogue?.providers?.items?.length} courses
               </span>
             </div>
           </div>
@@ -76,20 +76,25 @@ const Courses = (props: any) => {
               <div className="font-medium">
                 Showing{" "}
                 <span className="font-bold">
-                  {data?.data?.courseList?.edges?.length} courses
+                  {data?.catalogue?.providers?.items?.length} courses
                 </span>
               </div>
-              {data?.data?.courseList?.edges?.map((course: any) => (
+              {data?.catalogue?.providers?.items?.map((course: any) => (
                 <div className="rounded overflow-hidden shadow-lg bg-white font-regular my-4 flex">
-                  <img
-                    className="w-[200px]"
-                    src={course?.node?.coursePictureUrl}
-                    alt="Books"
-                  />
+                  {course?.tags?.image ? (
+                    <img
+                      className="w-[200px]"
+                      src={course?.tags?.image}
+                      alt="Books"
+                    />
+                  ) : (
+                    <img className="w-[200px]" src={Books} alt="Books" />
+                  )}
+
                   <div>
                     <div className="px-6 py-4">
                       <div className="font-bold text-xl mb-2">
-                        {course?.node?.title}
+                        {course?.descriptor?.name}
                       </div>
                       <p className="text-gray-700 text-base">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -99,16 +104,13 @@ const Courses = (props: any) => {
                     </div>
                     <div className="px-6 pt-4 pb-2">
                       <span className="inline-block bg-red-200 rounded-full px-3 py-1 text-sm font-semibold text-red-700 mr-2 mb-2">
-                        {course?.node?.ncCode}
+                        {course?.fulfilments?.type}
                       </span>
                       <span className="inline-block bg-yellow-200 rounded-full px-3 py-1 text-sm font-semibold text-yellow-700 mr-2 mb-2">
-                        {course?.node?.category[0]?.name}
+                        {course?.provider?.id}
                       </span>
                       <span className="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">
-                        {course?.node?.weeks} weeks
-                      </span>
-                      <span className="inline-block bg-purple-200 rounded-full px-3 py-1 text-sm font-semibold text-purple-700 mr-2 mb-2">
-                        {course?.node?.instructorInstitute}
+                        {course?.price?.value} {course?.price?.currency}
                       </span>
                     </div>
                   </div>
