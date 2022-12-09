@@ -55,16 +55,6 @@ const Home = (props: any) => {
               </h1>
             </div>
             <form className="mt-10">
-              <div className="mb-4">
-                <label className="block text-gray-700 text-md font-medium mb-2">
-                  Block
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  type="text"
-                  onChange={(e) => setBlock(e.target.value)}
-                />
-              </div>
               {FILTERS.map((filter): any => {
                 return (
                   <div className="mb-4">
