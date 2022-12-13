@@ -52,17 +52,15 @@ export const intentGenerator = (intentFilters: DSEP_SEARCH_FILTER) => {
           minimum_value: intentFilters.min_price,
           maximum_value: intentFilters.max_price,
         },
-        rating: {
-          value: intentFilters.rating,
-        },
+        rating: intentFilters.rating,
         tags: {
           course_level: intentFilters.course_level,
           course_mode: intentFilters.course_mode,
           competency: intentFilters.competency,
           exams: intentFilters.exams,
           subjects: intentFilters.subjects,
-          isCertified: intentFilters.isCertified ? 'Y' : 'N',
-          course_credits: intentFilters.course_credits ? 'Y' : 'N',
+          isCertified: intentFilters.isCertified === false ? 'N' : 'Y',
+          course_credits: intentFilters.course_credits === false ? 'N' : 'Y',
           course_duration: intentFilters.course_duration,
         },
       },
@@ -103,23 +101,6 @@ export const catalogueGenerator = (
       providerWise[item.provider].push(item);
     }
   });
-
-  /**
-   * "competency": "145",
-    "course_level": "UG",
-    "course_type": "Video",
-    "exams": "GATE",
-    "id": 1,
-    "isCertified": true,
-    "max_price": "100",
-    "min_price": "80",
-    "name": "Principles of Electrical Engineering",
-    "provider": "NPTEL",
-    "rating": "4",
-    "seller_email": "sample11@gmail.com",
-    "seller_name": "IIT Kanpur",
-    "subjects": "Electrical Engineering, Electronics Engineering "
-   */
 
   return {
     catalogue: {
@@ -164,50 +145,3 @@ export const catalogueGenerator = (
     },
   };
 };
-
-export const altCatalogueGen = (courses: ReadonlyArray<any>) => {
-  return {
-    catalogue: {
-      descriptor: {
-        name: `Catalogue for search query`,
-      },
-      providers: {
-        id: 'Swayam',
-        descriptor: {
-          name: 'Swayam',
-        },
-        items: courses.map((item: any) => {
-          const course = item.node;
-          return {
-            id: course.id,
-            descriptor: {
-              name: course.title,
-            },
-            category_id: course.category.join(','),
-            price: {
-              currency: 'INR',
-              value: course.maximum_value ? course.maximum_value : 0,
-              maximum_value: course.maximum_value ? course.maximum_value : 0,
-              minimum_value: course.minimum_value ? course.minimum_value : 0,
-            },
-            provider: {
-              id: `Swayam- ${course.ncCode}`,
-            },
-            fulfilments: {
-              type: course.semester,
-            },
-            tags: {
-              image: course.coursePictureUrl,
-              details: course.url,
-              course_level: course.course_level,
-              competency: course.competency,
-              exams: course.exams,
-              subjects: course.subjects,
-              course_credits: course.credits ? 'Y' : 'N',
-            },
-          };
-        }),
-      }
-    }
-  };
-}

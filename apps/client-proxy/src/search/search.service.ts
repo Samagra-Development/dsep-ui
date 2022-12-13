@@ -23,9 +23,10 @@ export class SearchService {
       ),
       message: msg,
     };
+    console.log('payload: ', payload);
     console.log('process.env.BAP_URI: ', process.env.BAP_URI);
     return await requestForwarder(
-      process.env.BAP_URI,
+      'http://localhost:5010',
       payload,
       this.httpService,
     );
