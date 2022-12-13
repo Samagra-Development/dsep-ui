@@ -25,12 +25,19 @@
 }
 
 body {
-  background-image: url("./assets/images/homeScreen2.png");
+  /* background-image: url("./assets/images/homeScreen2.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
+  min-height: 100vh; */
 }
+#light {
+  background-color: white;
+}
+#dark {
+  background-color: #041d2f;
+}
+
 /* .icons-styling {
   background-image: linear-gradient(-45deg, #b8e6f5 0%, #04befe 100%);
   animation-name: animationicon;
