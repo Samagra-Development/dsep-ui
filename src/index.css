@@ -32,10 +32,10 @@ body {
   min-height: 100vh; */
   overflow-x: hidden !important;
 }
-#light {
+body #light {
   background-color: white;
 }
-#dark {
+body #dark {
   background-color: #041d2f;
 }
 
