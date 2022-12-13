@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HomeIllustartion from "../assets/images/illustration.svg";
+import LoginIllustration from "../assets/images/login.svg";
 
 const Home = (props: any) => {
   const socket = props.socket;
   const navigate = useNavigate();
   const FILTERS = [
-    "provider",
-    "course_mode",
-    "course_duration",
-    "course_credits",
-    "course_category",
-    "query",
+    "Username",
+    "Password",
+    // "course_level",
+    // "query",
+    // "rating",
+    // "max_price",
+    // "min_price",
+    // "competency",
+    // "exams",
+    // "subjects",
+    // "isCertified",
+    // "course_type",
+    // "seller_name",
+    // "seller_email",
   ];
 
   const [filters, setFilters] = useState({});
@@ -34,7 +43,6 @@ const Home = (props: any) => {
   }, []);
 
   const handleSubmit = () => {
-    console.log({ filters });
     props.socket.emit("search", filters);
     navigate("/courses");
   };
@@ -42,20 +50,21 @@ const Home = (props: any) => {
     <div className="grid grid-cols-2 gap-4 min-h-screen">
       <div className="col-span-1">
         <div className="flex flex-col justify-center items-center min-h-screen">
-          <div className="bg-white px-11 mx-5 py-11 rounded shadow-md bg-opacity-70 my-10">
+          <div className="px-11 mx-5 py-11 my-10">
+            <img className="m-auto mb-5 w-8/12" src={LoginIllustration} alt="" />
             <div>
-              <h1 className="text-3xl text-blue-900 font-bold mb-8 text-center">
-                Select the courses basis this criteria
+              <h1 className="text-5xl text-sky-500 font-bold mb-8 uppercase text-center">
+                welcome
               </h1>
             </div>
             <form className="mt-10">
-              {FILTERS.map((filter): any => {
+              {FILTERS.map((filter, index): any => {
                 return (
-                  <div className="mb-4">
+                  <div className="mb-4" key={index}>
                     <label
                       htmlFor={filter}
                       id={filter}
-                      className="block text-gray-700 text-md font-medium mb-2"
+                      className="text-sky-500 block text-md font-medium mb-2"
                     >
                       {filter}
                     </label>
@@ -66,7 +75,7 @@ const Home = (props: any) => {
                         setFilters({ ...filters, [filter]: e.target.value });
                         console.log("filters: ", filters);
                       }}
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      className={`border-b-2 border-sky-500 w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline`}
                     />
                   </div>
                 );
@@ -74,9 +83,9 @@ const Home = (props: any) => {
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="bg-blue-900 hover:bg-blue-800 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full text-lg"
+                className="bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mt-4 w-full text-lg"
               >
-                Submit
+                Login
               </button>
             </form>
           </div>
@@ -85,7 +94,7 @@ const Home = (props: any) => {
       <div className="col-span-1 flex justify-center items-center min-h-screen">
         <img
           src={HomeIllustartion}
-          className="w-4/5 h-auto icons-styling p-4"
+          className="ml-auto w-fit h-screen icons-styling"
         />
       </div>
     </div>
