@@ -30,11 +30,12 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh; */
+  overflow-x: hidden !important;
 }
-#light {
+body #light {
   background-color: white;
 }
-#dark {
+body #dark {
   background-color: #041d2f;
 }
 
