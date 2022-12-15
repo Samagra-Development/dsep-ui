@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { map, forEach } from 'lodash';
+import { map, forEach } from "lodash";
 import Loader from "../components/Loader";
 import CourseCard from "../components/CourseCard";
 import Filters from "../components/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { coursesSelector, setCourses } from "../store/slices/coursesSlice";
 import Header from "../components/Header";
-
 
 const Courses = (props: any) => {
   const { socket, mode } = props;
@@ -15,11 +14,11 @@ const Courses = (props: any) => {
   const [data, setData] = useState<any>();
   const [showData, setShowData] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
 
   const dispatch = useDispatch();
   const courses = useSelector(coursesSelector);
- console.log("bbb:",{courses})
+  console.log("bbb:", { courses });
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -32,12 +31,11 @@ const Courses = (props: any) => {
     });
 
     socket.on("response", (payload: any) => {
-      console.log("ccc payload in response: ", payload);     
-      dispatch(setCourses(payload.message))
+      console.log("ccc payload in response: ", payload);
+      dispatch(setCourses(payload.message));
       setShowData(true);
       setLoading(false);
     });
- 
 
     return () => {
       socket.off("connect");
@@ -47,10 +45,10 @@ const Courses = (props: any) => {
     };
   }, [dispatch]);
 
-  const handleChange = (ev:any) => { 
+  const handleChange = (ev: any) => {
     setSearchText(ev.target.value);
     socket.emit("search", {
-      query: ev.target.value,      
+      query: ev.target.value,
     });
     setLoading(true);
   };
@@ -63,54 +61,74 @@ const Courses = (props: any) => {
       });
       setLoading(true);
     },
-    [socket],
-  )
+    [socket]
+  );
 
-  
   const dataToDisplay = useMemo(() => {
-    const dtp:Array<any> = [];
-    forEach(courses?.['bpp/providers'], (categories: any, index: number) => {     
+    const dtp: Array<any> = [];
+    forEach(courses?.["bpp/providers"], (categories: any, index: number) => {
       if (index < 5)
-        forEach(categories?.items, (category: any, index: number) => {         
-          if (index < 5)
-            dtp.push(category);
-        })
+        forEach(categories?.items, (category: any, index: number) => {
+          if (index < 5) dtp.push(category);
+        });
     });
     return dtp;
   }, [courses]);
 
-  const isDataAvailable=useMemo(()=>showData || dataToDisplay?.length > 0 ,[showData,dataToDisplay]);
+  const isDataAvailable = useMemo(
+    () => showData || dataToDisplay?.length > 0,
+    [showData, dataToDisplay]
+  );
 
   return (
     <>
-    <Header handleChange={handleChange} isSearchVisible/>
+      <Header handleChange={handleChange} isSearchVisible />
       {console.log(data)}
-      {!isDataAvailable &&
-        <Loader />
-      }
+      {!isDataAvailable && <Loader />}
       {isDataAvailable && (
-        <div className={`${mode === "dark" ? "text-white" : ""} flex justify-center items-center min-h-screen flex-col`}>
-          
-
-          <div className="w-screen flex items-center">
-            <div className="text-4xl font-medium min-w-[1024px] mx-auto">
-           {searchText &&  ` Search results for ${searchText}`}
+        <div
+          className={`flex justify-center items-center min-h-screen flex-col w-screen mt-8`}
+        >
+          {searchText && (
+            <div
+              className={`${
+                mode === "dark" ? "text-white" : ""
+              } text-4xl font-medium min-w-[1024px] mx-auto py-8`}
+            >
+              Search results for{" "}
+              <span className="font-bold">"{searchText}"</span>
               {/* <span className="block bg-gray-200 rounded px-3 py-1 text-sm font-medium w-[95px] text-gray-700 mr-2 mb-2 mt-4">
                 {data?.catalogue?.providers?.items?.length} courses
               </span> */}
             </div>
-          </div>
-          <div className="grid grid-cols-4 gap-4 max-w-screen-lg mt-5">
-            <Filters applyFilter={applyFilter} />
+          )}
+
+          <div className="grid grid-cols-4 gap-4 max-w-[1024px] mx-auto mt-5">
+            <div className="col-span-1">
+              <Filters applyFilter={applyFilter} mode={mode}/>
+            </div>
+
             <div className="col-span-3">
-            {!loading &&  <div className="font-medium">
-                Showing &nbsp;
-                <span className="font-bold">
-                  {dataToDisplay?.length} courses
-                </span>
-              </div>}             
-             
-               {dataToDisplay ? map(dataToDisplay,(course:any)=><CourseCard course={course} /> ) : loading ? <>Loading...</>:null} 
+              {!loading && (
+                <div
+                  className={`${
+                    mode === "dark" ? "text-white" : ""
+                  } font-medium mb-3`}
+                >
+                  Showing &nbsp;
+                  <span className="font-bold">
+                    {dataToDisplay?.length} courses
+                  </span>
+                </div>
+              )}
+
+              {dataToDisplay ? (
+                map(dataToDisplay, (course: any) => (
+                  <CourseCard course={course} />
+                ))
+              ) : loading ? (
+                <>Loading...</>
+              ) : null}
             </div>
           </div>
         </div>
