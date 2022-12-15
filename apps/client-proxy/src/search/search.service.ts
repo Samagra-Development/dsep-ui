@@ -18,8 +18,8 @@ export class SearchService {
       context: contextGenerator(
         transactionId,
         'search',
-        process.env.BAP_URI,
-        '101',
+        'https://bap.dsep.samagra.io',
+        'bap.dsep.samagra.io',
       ),
       message: msg,
     };
