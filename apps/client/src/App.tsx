@@ -6,8 +6,8 @@ import Home from "./pages/Home";
 import Courses from "./pages/Courses";
 import CourseDetails from './pages/CourseDetails';
 
-// const socket = io("https://api.dsep.samagra.io");
-const socket = io("http://localhost:3000");
+const socket = io("https://api.dsep.samagra.io");
+// const socket = io("http://localhost:3000");
 
 function App() {
 
