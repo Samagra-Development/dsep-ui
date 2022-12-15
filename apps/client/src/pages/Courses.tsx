@@ -93,7 +93,7 @@ const Courses = (props: any) => {
             <div
               className={`${
                 mode === "dark" ? "text-white" : ""
-              } text-4xl font-medium min-w-[1024px] mx-auto py-8`}
+              } text-4xl font-medium min-w-[1100px] mx-auto py-8`}
             >
               Search results for{" "}
               <span className="font-bold">"{searchText}"</span>
@@ -103,7 +103,7 @@ const Courses = (props: any) => {
             </div>
           )}
 
-          <div className="grid grid-cols-4 gap-4 max-w-[1024px] mx-auto mt-5">
+          <div className="grid grid-cols-4 gap-4 max-w-[1100px] mx-auto mt-5">
             <div className="col-span-1">
               <Filters applyFilter={applyFilter} mode={mode}/>
             </div>
