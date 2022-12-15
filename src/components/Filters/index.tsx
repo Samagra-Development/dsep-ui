@@ -9,7 +9,7 @@ const Filters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
                 <MdFilterListAlt />
                 <div>Filter by</div>
             </div>
-            <div className="bg-white border border-gray-300 rounded px-5 py-7 my-4">
+            <div className="bg-white border border-gray-300 rounded ">
                 <CourseFilters applyFilter={applyFilter} />
             </div>
         </div>

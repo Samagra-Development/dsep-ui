@@ -27,7 +27,7 @@ const NationalCodinator: FC<{ applyFilter: any }> = ({ applyFilter }) => {
 
 
     return (
-        <Dropdown options={options} onChange={onChange} value={value} placeholder="Select an option" />
+        <Dropdown options={options} onChange={onChange} value={value} placeholder="Select an option"  className='w-full'/>
 
     )
 }

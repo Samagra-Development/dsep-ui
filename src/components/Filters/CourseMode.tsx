@@ -21,7 +21,7 @@ const CourseMode: FC<{ applyFilter: any }> = ({ applyFilter }) => {
 
 
     return (
-        <Dropdown options={options} onChange={onChange} value={mode}  />
+        <Dropdown options={options} onChange={onChange} value={mode} className='w-full' />
     )
 }
 
