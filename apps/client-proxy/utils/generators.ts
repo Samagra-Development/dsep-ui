@@ -10,7 +10,7 @@ export const contextGenerator = (
     transaction_id: transactionId,
     message_id: transactionId,
     action: action,
-    timestamp: Date.now().toLocaleString(),
+    timestamp: new Date(Date.now()),
     domain: 'dsep:courses',
     country: 'IND',
     city: '',
