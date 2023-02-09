@@ -8,10 +8,10 @@ const Filters: FC<{ applyFilter: any; mode: any }> = ({
 }) => {
   function handleFilter(){
     let filterDiv = document.getElementById('filterDiv');
-    if(filterDiv?.classList.contains('sm:hidden')){
-      filterDiv.classList.remove('sm:hidden');
+    if(filterDiv?.classList.contains('hidden')){
+      filterDiv.classList.remove('hidden');
     }else{
-      filterDiv?.classList.add('sm:hidden');
+      filterDiv?.classList.add('hidden');
     }
   }
   return (
@@ -22,7 +22,7 @@ const Filters: FC<{ applyFilter: any; mode: any }> = ({
           Filter
         </div>
       </div>
-      <div id='filterDiv' className="lg:block sm:hidden">
+      <div id='filterDiv' className="lg:block hidden">
         <CourseFilters applyFilter={applyFilter} />
       </div>
     </div>
