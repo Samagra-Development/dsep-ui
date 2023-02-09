@@ -25,7 +25,7 @@ const Courses = (props: any) => {
       console.log("socket connected");
       setIsConnected(true);
     });
-
+    
     socket.on("disconnect", () => {
       setIsConnected(false);
     });
@@ -89,31 +89,31 @@ const Courses = (props: any) => {
         <div
           className={`flex justify-center items-center min-h-screen flex-col w-screen mt-8`}
         >
-          {searchText && (
-            <div
-              className={`${
-                mode === "dark" ? "text-white" : ""
-              } text-4xl font-medium min-w-[1100px] mx-auto py-8`}
-            >
-              Search results for{" "}
-              <span className="font-bold">"{searchText}"</span>
-              {/* <span className="block bg-gray-200 rounded px-3 py-1 text-sm font-medium w-[95px] text-gray-700 mr-2 mb-2 mt-4">
+          <div>
+            {searchText && (
+              <div
+                className={`${mode === "dark" ? "text-white" : ""
+                  } text-4xl font-medium min-w-[1100px] mx-auto py-8`}
+              >
+                Search results for{" "}
+                <span className="font-bold">"{searchText}"</span>
+                {/* <span className="block bg-gray-200 rounded px-3 py-1 text-sm font-medium w-[95px] text-gray-700 mr-2 mb-2 mt-4">
                 {data?.catalogue?.providers?.items?.length} courses
               </span> */}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
 
-          <div className="grid grid-cols-4 gap-4 max-w-[1100px] mx-auto mt-5">
+          <div className="lg:grid lg:grid-cols-4 lg:gap-4 lg:max-w-[1100px] lg:mx-auto lg:mt-5 sm:m-8">
             <div className="col-span-1">
-              <Filters applyFilter={applyFilter} mode={mode}/>
+              <Filters applyFilter={applyFilter} mode={mode} />
             </div>
 
             <div className="col-span-3">
               {!loading && (
                 <div
-                  className={`${
-                    mode === "dark" ? "text-white" : ""
-                  } font-medium mb-3`}
+                  className={`${mode === "dark" ? "text-white" : ""
+                    } font-medium mb-3`}
                 >
                   Showing &nbsp;
                   <span className="font-bold">

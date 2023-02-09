@@ -43,7 +43,7 @@ const CourseFilters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
       <ListGroup>
         {map(courseFilters, (cFilter: any) => (
           <>
-            <ListGroup.Item className="w-full">{cFilter.label}</ListGroup.Item>
+            <div className="w-full text-left ml-5 mt-1">{cFilter.label}</div>
             {cFilter.component && (
               <ListGroup.Item className="w-full">
                 {cFilter.component}

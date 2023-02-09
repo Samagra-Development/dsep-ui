@@ -2,7 +2,7 @@ import { FC, useMemo } from "react";
 import Books from "../assets/images/books.jpg";
 import { LinkContainer } from "react-router-bootstrap";
 import { CourseType } from "../types/courses";
-import Rating from "./Raitings";
+import Rating from "./Ratings";
 
 const CourseCard: FC<{ course: CourseType }> = ({ course }) => {
   const imageUrl = useMemo(
@@ -15,10 +15,10 @@ const CourseCard: FC<{ course: CourseType }> = ({ course }) => {
       <div className="mb-4">
         <a
           href="#"
-          className="flex flex-col items-center bg-white rounded-lg shadow-md md:flex-row hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
+          className="flex flex-col items-center bg-white rounded-lg shadow-md md:flex-row"
         >
           <img
-            className="w-[200px] min-h-[270px] rounded"
+            className="w-6/12 min-h-[270px] rounded m-2"
             src={imageUrl}
             alt="courseImage"
           />
