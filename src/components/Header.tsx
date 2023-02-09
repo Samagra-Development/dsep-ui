@@ -13,10 +13,10 @@ const Header: FC<{
         <Navbar.Brand href="#">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
-            className="mx-4 h-6 sm:h-9"
+            className="mx-4 h-6 sm:h-9 pt-2"
             alt="Flowbite Logo"
           />
-          <span className="self-center whitespace-nowrap text-xl font-semibold text-white">
+          <span className="self-center whitespace-nowrap text-xl font-semibold text-white pt-2">
             DSEP
           </span>
         </Navbar.Brand>
@@ -26,7 +26,7 @@ const Header: FC<{
         {isSearchVisible && (
           <div className="flex md:order-2">
             <form className="flex items-center  justify-end w-screen">
-              <div className="relative w-1/5 mr-32 mt-[-16px]">
+              <div className="relative w-1/5 mr-32 mt-[-34px]">
                 <input
                   type="text"
                   id="simple-search"

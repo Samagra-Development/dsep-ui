@@ -11,7 +11,7 @@ const CourseFilters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
     () => [
       {
         key: "NationalCoordinator",
-        label: "National Coordinator",
+        label: "Provider",
         value: "",
         component: <NationalCodinator applyFilter={applyFilter} />,
       },
@@ -42,14 +42,14 @@ const CourseFilters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
     <>
       <ListGroup>
         {map(courseFilters, (cFilter: any) => (
-          <>
-            <ListGroup.Item className="w-full">{cFilter.label}</ListGroup.Item>
+          <div className="bg-white">
+            <div className="w-full text-[#000] px-4">{cFilter.label}</div>
             {cFilter.component && (
               <ListGroup.Item className="w-full">
                 {cFilter.component}
               </ListGroup.Item>
             )}
-          </>
+          </div>
         ))}
       </ListGroup>
     </>

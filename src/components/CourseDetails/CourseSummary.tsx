@@ -21,24 +21,24 @@ const CourseSummary: FC<{ course: CourseType }> = ({ course }) => {
     <div className="col-span-3 ">
       <ListGroup>
         {haveVideo ? (
-          <ListGroup.Item active={true}>
+          <div>
             <Player>
               <source src="https://www.youtube.com/watch?v=tXBOtxGGwog" />
             </Player>
-          </ListGroup.Item>
+          </div>
         ) : (
-          <ListGroup.Item>
-            <Card className="mx-auto w-auto">
+          <div>
+            <div className="mx-auto w-full">
               <img
-                className="mb-3  shadow-lg h-25 w-auto"
+                className="mb-3 w-auto"
                 src={imageUrl}
                 alt="CourseImage"
               />
-            </Card>
-          </ListGroup.Item>
+            </div>
+          </div>
         )}
 
-        <ListGroup.Item active={true}>
+        <div>
           {" "}
           <div className="px-5">
             <a
@@ -49,50 +49,47 @@ const CourseSummary: FC<{ course: CourseType }> = ({ course }) => {
               Go To Class
             </a>
           </div>{" "}
-        </ListGroup.Item>
-        <ListGroup.Item active={true}>
-          {" "}
-          Course Status : Upcoming{" "}
-        </ListGroup.Item>
-        <ListGroup.Item active={true}>
+        </div>
+        <div className="px-4 py-3"> Course Status : Upcoming </div>
+        <div className="px-4 py-3">
           {" "}
           <p> Course Type : Elective </p>{" "}
-        </ListGroup.Item>
-        <ListGroup.Item active={true}>
+        </div>
+        <div className="px-4 py-3">
           {" "}
           <p>
             {" "}
             Duration : {`${course?.time?.duration?.split("P")[1]}eek`}
           </p>{" "}
-        </ListGroup.Item>
-        <ListGroup.Item active={true}>
+        </div>
+        <div className="px-4 py-3">
           {" "}
           <p> Start Date : {startDate ?? "N/A"}</p>{" "}
-        </ListGroup.Item>
-        <ListGroup.Item active={true}>
+        </div>
+        <div className="px-4 py-3">
           {" "}
           <p> End Date : {endDate ?? "N/A"}</p>{" "}
-        </ListGroup.Item>
-        <ListGroup.Item active={true}>
+        </div>
+        <div className="px-4 py-3">
           {" "}
           <p> Exam Date : N/A</p>{" "}
-        </ListGroup.Item>
-        <ListGroup.Item active={true}>
+        </div>
+        <div className="px-4 py-3">
           {" "}
           <p> Enrollment Ends : {enrollementEndDate ?? "N/A"} </p>{" "}
-        </ListGroup.Item>
-        <ListGroup.Item active={true}>
+        </div>
+        <div className="px-4 py-3">
           {" "}
           <p> Category : {course?.category_id} </p>{" "}
-        </ListGroup.Item>
-        <ListGroup.Item active={true}>
+        </div>
+        <div className="px-4 py-3">
           {" "}
           <p> Credit Points : {course?.tags?.credits ?? 0}</p>{" "}
-        </ListGroup.Item>
-        <ListGroup.Item active={true}>
+        </div>
+        <div className="px-4 py-3">
           {" "}
           <p> Level : N/A</p>{" "}
-        </ListGroup.Item>
+        </div>
       </ListGroup>
     </div>
   );

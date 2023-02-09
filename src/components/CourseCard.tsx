@@ -12,7 +12,7 @@ const CourseCard: FC<{ course: CourseType }> = ({ course }) => {
 
   return (
     <LinkContainer to={`/courses/${course?.id}`} style={{ cursor: "pointer" }}>
-      <div className="mb-4">
+      <div className="mb-4 bg-white">
         <a
           href="#"
           className="flex flex-col items-center bg-white rounded-lg shadow-md md:flex-row hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -22,7 +22,7 @@ const CourseCard: FC<{ course: CourseType }> = ({ course }) => {
             src={imageUrl}
             alt="courseImage"
           />
-          <div className="flex flex-col justify-between p-4 leading-normal">
+          <div className="flex flex-col justify-between p-4 leading-normal bg-white">
             <h5 className="mb-2 text-xl tracking-tight text-gray-900 font-bold">
               {" "}
               {course?.descriptor?.name}

@@ -10,6 +10,7 @@ import Header from "../components/Header";
 const Courses = (props: any) => {
   const { socket, mode } = props;
 
+  console.log(socket, socket);
   const [connected, setIsConnected] = useState<boolean>(false);
   const [data, setData] = useState<any>();
   const [showData, setShowData] = useState(false);
@@ -21,6 +22,9 @@ const Courses = (props: any) => {
   console.log("bbb:", { courses });
 
   useEffect(() => {
+    socket.emit("search", {
+      query: "",
+    });
     socket.on("connect", () => {
       console.log("socket connected");
       setIsConnected(true);
@@ -43,7 +47,7 @@ const Courses = (props: any) => {
       socket.off("response");
       setShowData(false);
     };
-  }, [dispatch]);
+  }, [dispatch, socket]);
 
   const handleChange = (ev: any) => {
     setSearchText(ev.target.value);
@@ -105,7 +109,7 @@ const Courses = (props: any) => {
 
           <div className="grid grid-cols-4 gap-4 max-w-[1100px] mx-auto mt-5">
             <div className="col-span-1">
-              <Filters applyFilter={applyFilter} mode={mode}/>
+              <Filters applyFilter={applyFilter} mode={mode} />
             </div>
 
             <div className="col-span-3">
