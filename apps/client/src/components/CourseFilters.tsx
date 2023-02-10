@@ -40,18 +40,18 @@ const CourseFilters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
 
   return (
     <>
-      <ListGroup>
+      <ul className="pt-1">
         {map(courseFilters, (cFilter: any) => (
-          <>
-            <div className="w-full text-left ml-5 mt-1">{cFilter.label}</div>
+          <div className="bg-white">
+            <div className="w-full text-[#000] px-4">{cFilter.label}</div>
             {cFilter.component && (
-              <ListGroup.Item className="w-full">
+              <li className="p-2 text-center">
                 {cFilter.component}
-              </ListGroup.Item>
+              </li>
             )}
-          </>
+          </div>
         ))}
-      </ListGroup>
+      </ul>
     </>
   );
 };
