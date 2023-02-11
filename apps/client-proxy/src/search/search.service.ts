@@ -12,13 +12,15 @@ export class SearchService {
     transactionId: string,
     searchPayload: DSEP_SEARCH_FILTER,
   ): Promise<any> {
+    console.log('searchPayload: ', searchPayload);
     const msg = intentGenerator(searchPayload);
-    console.log('generated intent: ', msg);
+    console.log('generated intent: ', msg.intent.category);
     const payload = {
       context: contextGenerator(
         transactionId,
         'search',
-        'https://bap.dsep.samagra.io',
+        // 'https://bap.dsep.samagra.io',
+        'http://localhost:5010',
         'bap.dsep.samagra.io',
       ),
       message: msg,

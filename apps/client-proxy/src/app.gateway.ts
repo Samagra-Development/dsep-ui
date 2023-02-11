@@ -7,6 +7,7 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { SearchService } from './search/search.service';
+import { SelectService } from './select/select.service';
 
 @WebSocketGateway({
   cors: {
@@ -15,7 +16,10 @@ import { SearchService } from './search/search.service';
   port: process.env.PROXY_PORT,
 })
 export class AppGateway {
-  constructor(private readonly searchService: SearchService) {}
+  constructor(
+    private readonly searchService: SearchService,
+    private readonly selectService: SelectService,
+  ) {}
 
   @WebSocketServer() server: Server;
 
@@ -28,6 +32,7 @@ export class AppGateway {
   @SubscribeMessage('response')
   async handleResponse(@MessageBody() response: any) {
     console.log('response methiod');
+    console.log('response: ', response);
     const transaction_id = response.context.transaction_id;
     this.server.to(transaction_id).emit('response', response);
     this.server.in(transaction_id).socketsLeave(transaction_id);
@@ -50,13 +55,10 @@ export class AppGateway {
     @MessageBody() selectQuery: any,
     @ConnectedSocket() client: Socket,
   ) {
-    // try {
-    //   client.join(selectQuery.context.transaction_id);
-    //   return this.selectService.handleSelectEvent(selectQuery, client.id);
-    // } catch (err) {
-    //   console.error('err: ', err);
-    //   throw new InternalServerErrorException(err);
-    // }
+    console.log('select message received: ', selectQuery); // will contain item, provider and category
+    const transactionId = Date.now() + client.id; // generating the transactionID
+    client.join(transactionId); // creating a new room with this transactionID
+    return this.selectService.handleSelectEvent(selectQuery);
   }
 
   @SubscribeMessage('init')
