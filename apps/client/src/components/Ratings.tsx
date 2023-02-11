@@ -29,7 +29,7 @@ const Rating: FC<{ value: number; text?: string; color?: string;size?:number }> 
 }
 
 Rating.defaultProps = {
-    color: '#f8e825',
+    color: '#FECC00',
     size:2
 }
 

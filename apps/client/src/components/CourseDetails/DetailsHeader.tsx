@@ -1,7 +1,7 @@
 import { Card } from 'flowbite-react'
 import React, { FC } from 'react'
 import { CourseType } from '../../types/courses'
-import Rating from '../Raitings'
+import Rating from '../Ratings'
 
 const DetailsHeader: FC<{ course: CourseType }> = ({ course }) => {
     return (
