@@ -20,7 +20,7 @@ const NationalCodinator: FC<{ applyFilter: any }> = ({ applyFilter }) => {
     const onChange = useCallback(
         (option: any): void => {
             setValue(option);
-            applyFilter({ provider: option?.value });
+            applyFilter((prev:any)=>({...prev,provider: option?.value}));           
         },
         [applyFilter],
     );

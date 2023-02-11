@@ -5,6 +5,8 @@ import NationalCodinator from "./Filters/NationalCodinator";
 import CourseMode from "./Filters/CourseMode";
 import CourseDuration from "./Filters/CourseDuration";
 import CourseCredits from "./Filters/CourseCredits";
+import CourseStatus from "./Filters/CourseStatus";
+import CourseCategory from "./Filters/CourseCategory";
 
 const CourseFilters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
   const courseFilters = useMemo(
@@ -33,6 +35,20 @@ const CourseFilters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
         value: "",
         items: [],
         component: <CourseCredits applyFilter={applyFilter} />,
+      },
+      // {
+      //   key: "Status",
+      //   label: "Course Status",
+      //   value: "",
+      //   items: [],
+      //   component: <CourseStatus applyFilter={applyFilter} />,
+      // },
+      {
+        key: "Category",
+        label: "Course Category",
+        value: "",
+        items: [],
+        component: <CourseCategory applyFilter={applyFilter} />,
       },
     ],
     []

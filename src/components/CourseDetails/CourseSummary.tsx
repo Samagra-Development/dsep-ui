@@ -1,11 +1,13 @@
 import { Card, ListGroup } from "flowbite-react";
-import { FC, useMemo } from "react";
+import { FC, useMemo, useState } from "react";
 import { Player } from "video-react";
 import useGetFormatedDate from "../../hooks/useGetFormatedDate";
 import { CourseType } from "../../types/courses";
 import Books from "../../assets/images/books.jpg";
+import WarningModal from "../WarningModal";
 
 const CourseSummary: FC<{ course: CourseType }> = ({ course }) => {
+  const [open, setOpen] = useState(false);
   const startDate = useGetFormatedDate(course?.time?.range?.start);
   const endDate = useGetFormatedDate(course?.time?.range?.end);
   const enrollementEndDate = useGetFormatedDate(
@@ -29,68 +31,51 @@ const CourseSummary: FC<{ course: CourseType }> = ({ course }) => {
         ) : (
           <div>
             <div className="mx-auto w-full">
-              <img
-                className="mb-3 w-auto"
-                src={imageUrl}
-                alt="CourseImage"
-              />
+              <img className="mb-3 w-auto" src={imageUrl} alt="CourseImage" />
             </div>
           </div>
         )}
 
         <div>
-          {" "}
           <div className="px-5">
-            <a
-              href={course?.tags?.url}
-              target="_blank"
+            <button
+              onClick={() => setOpen(true)}
               className="w-full block text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            >
+            >            
               Go To Class
-            </a>
-          </div>{" "}
+            </button>
+          </div>
         </div>
         <div className="px-4 py-3"> Course Status : Upcoming </div>
         <div className="px-4 py-3">
-          {" "}
-          <p> Course Type : Elective </p>{" "}
+          <p> Course Type : Elective </p>
         </div>
         <div className="px-4 py-3">
-          {" "}
-          <p>
-            {" "}
-            Duration : {`${course?.time?.duration?.split("P")[1]}eek`}
-          </p>{" "}
+          <p>Duration : {`${course?.time?.duration?.split("P")[1]}eek`}</p>
         </div>
         <div className="px-4 py-3">
-          {" "}
-          <p> Start Date : {startDate ?? "N/A"}</p>{" "}
+          <p> Start Date : {startDate ?? "N/A"}</p>
         </div>
         <div className="px-4 py-3">
-          {" "}
-          <p> End Date : {endDate ?? "N/A"}</p>{" "}
+          <p> End Date : {endDate ?? "N/A"}</p>
         </div>
         <div className="px-4 py-3">
-          {" "}
-          <p> Exam Date : N/A</p>{" "}
+          <p> Exam Date : N/A</p>
         </div>
         <div className="px-4 py-3">
-          {" "}
-          <p> Enrollment Ends : {enrollementEndDate ?? "N/A"} </p>{" "}
+          <p> Enrollment Ends : {enrollementEndDate ?? "N/A"} </p>
         </div>
         <div className="px-4 py-3">
-          {" "}
-          <p> Category : {course?.category_id} </p>{" "}
+          <p> Category : {course?.category_id} </p>
         </div>
         <div className="px-4 py-3">
-          {" "}
-          <p> Credit Points : {course?.tags?.credits ?? 0}</p>{" "}
+          <p> Credit Points : {course?.tags?.credits ?? 0}</p>
         </div>
         <div className="px-4 py-3">
-          {" "}
-          <p> Level : N/A</p>{" "}
+          <p> Level : N/A</p>
         </div>
       </ListGroup>
+      <WarningModal open={open} setOpen={setOpen} url={course?.tags?.url ?? ''}/>
     </div>
   );
 };

@@ -13,17 +13,14 @@ const CourseDuration: FC<{ applyFilter: any }> = ({ applyFilter }) => {
         { label: '12 weeks', value: '12' },
         { label: '15 weeks', value: '15' },
         { label: '16 weeks', value: '16' },
-        { label: '24 weeks', value: '24' },     
+        { label: '24 weeks', value: '24' },
 
     ], []);
 
     const onChange = useCallback(
         (option: any): void => {
             setMode(option);
-            applyFilter({               
-                course_duration:option?.value               
-            });
-           ;
+            applyFilter((prev: any) => ({ ...prev, course_duration: option?.value }))
         },
         [applyFilter],
     );

@@ -6,6 +6,7 @@ import Filters from "../components/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { coursesSelector, setCourses } from "../store/slices/coursesSlice";
 import Header from "../components/Header";
+import NoCourseAvailable from "../components/NoCourseAvailable";
 
 const Courses = (props: any) => {
   const { socket, mode } = props;
@@ -14,6 +15,7 @@ const Courses = (props: any) => {
   const [data, setData] = useState<any>();
   const [showData, setShowData] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({});
   const [searchText, setSearchText] = useState("");
 
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ const Courses = (props: any) => {
       console.log("socket connected");
       setIsConnected(true);
     });
-    
+
     socket.on("disconnect", () => {
       setIsConnected(false);
     });
@@ -53,16 +55,13 @@ const Courses = (props: any) => {
     setLoading(true);
   };
 
-  const applyFilter = useCallback(
-    (filters: any) => {
-      socket.emit("search", {
-        query: "",
-        ...filters,
-      });
-      setLoading(true);
-    },
-    [socket]
-  );
+  useEffect(() => {
+    socket.emit("search", {
+      query: "",
+      ...filters,
+    });
+    setLoading(true);
+  }, [filters]);
 
   const dataToDisplay = useMemo(() => {
     const dtp: Array<any> = [];
@@ -92,8 +91,9 @@ const Courses = (props: any) => {
           <div>
             {searchText && (
               <div
-                className={`${mode === "dark" ? "text-white" : ""
-                  } text-4xl font-medium min-w-[1100px] mx-auto py-8`}
+                className={`${
+                  mode === "dark" ? "text-white" : ""
+                } text-4xl font-medium min-w-[1100px] mx-auto py-8`}
               >
                 Search results for{" "}
                 <span className="font-bold">"{searchText}"</span>
@@ -106,14 +106,15 @@ const Courses = (props: any) => {
 
           <div className="lg:grid lg:grid-cols-4 lg:gap-4 lg:max-w-[1100px] lg:mx-auto lg:mt-5 sm:m-8">
             <div className="col-span-1">
-              <Filters applyFilter={applyFilter} mode={mode} />
+              <Filters applyFilter={setFilters} mode={mode} />
             </div>
 
             <div className="col-span-3">
               {!loading && (
                 <div
-                  className={`${mode === "dark" ? "text-white" : ""
-                    } font-medium mb-3`}
+                  className={`${
+                    mode === "dark" ? "text-white" : ""
+                  } font-medium mb-3`}
                 >
                   Showing &nbsp;
                   <span className="font-bold">
@@ -121,7 +122,7 @@ const Courses = (props: any) => {
                   </span>
                 </div>
               )}
-
+              {dataToDisplay.length === 0 && <NoCourseAvailable /> }
               {dataToDisplay ? (
                 map(dataToDisplay, (course: any) => (
                   <CourseCard course={course} />

@@ -6,15 +6,15 @@ const CourseMode: FC<{ applyFilter: any }> = ({ applyFilter }) => {
     const [mode, setMode] = useState({ label: 'All', value: '' });
     const options = useMemo(() => [
         { label: 'All', value: '' },
-        { label: 'Self Paced', value: 'Self Paced' },
-        { label: 'Regular', value: 'Regular' },
+        { label: 'Self Paced', value: 'self_paced' },
+        { label: 'Regular', value: 'regular' },
 
     ], []);
 
     const onChange = useCallback(
         (option: any): void => {
-            setMode(option);           
-            applyFilter({course_mode:option?.value});
+            setMode(option);   
+            applyFilter((prev:any)=>({...prev,course_mode:option?.value}))
         },
         [applyFilter],
     );

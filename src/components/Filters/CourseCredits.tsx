@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState, FC } from 'react'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-const CourseCredits:  FC<{ applyFilter: any }> = ({ applyFilter }) => {
+const CourseCredits: FC<{ applyFilter: any }> = ({ applyFilter }) => {
     const [mode, setMode] = useState({ label: 'All', value: '' });
     const options = useMemo(() => [
         { label: 'All', value: '' },
@@ -14,9 +14,7 @@ const CourseCredits:  FC<{ applyFilter: any }> = ({ applyFilter }) => {
     const onChange = useCallback(
         (option: any): void => {
             setMode(option);
-            applyFilter({                            
-                course_credits:option?.value              
-            });
+            applyFilter((prev: any) => ({ ...prev, course_credits: option?.value }))
         },
         [applyFilter],
     );
