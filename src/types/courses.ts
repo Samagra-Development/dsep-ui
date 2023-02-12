@@ -4,7 +4,7 @@ export type CourseType={
     "descriptor": {
         "name": string,
         "long_desc"?: string,
-        "images": Array<string>
+        "images": Array<{url:string}>
     },
     "price": {
         "currency": string,

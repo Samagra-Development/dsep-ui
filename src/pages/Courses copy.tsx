@@ -7,10 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { coursesSelector, setCourses } from "../store/slices/coursesSlice";
 import Header from "../components/Header";
 import NoCourseAvailable from "../components/NoCourseAvailable";
-import { Row, Col, Container } from "react-bootstrap";
-import { HiAdjustmentsHorizontal } from "react-icons/hi2";
-import NewHeader from "../components/NewHeader";
-import CourseShimmer from "../components/CourseShimmer";
+
 const Courses = (props: any) => {
   const { socket, mode } = props;
 
@@ -66,10 +63,9 @@ const Courses = (props: any) => {
     setLoading(true);
   }, [filters]);
 
-  console.log("mnop:", { courses });
   const dataToDisplay = useMemo(() => {
     const dtp: Array<any> = [];
-    forEach(courses?.["providers"], (categories: any, index: number) => {
+    forEach(courses?.["bpp/providers"], (categories: any, index: number) => {
       if (index < 5)
         forEach(categories?.items, (category: any, index: number) => {
           if (index < 5) dtp.push(category);
@@ -83,67 +79,61 @@ const Courses = (props: any) => {
     [showData, dataToDisplay]
   );
 
-  // if (!isDataAvailable) return <Loader />;
   return (
     <>
-      <NewHeader handleChange={handleChange} isSearchVisible />
-      <Row style={{ background: "#f3f3f8" }}>
-        {searchText && (
-          <div
-            className={` text-4xl font-medium min-w-[1100px] mx-auto py-4 px-3 my-3 bg-white`}
-            // className={`${
-            //   mode === "dark" ? "text-white" : ""
-            // } text-4xl font-medium min-w-[1100px] mx-auto py-4 px-3 my-3 bg-white`}
-          >
-            <span style={{ color: "grey" }}> Search results for </span> &nbsp;
-            <span className="font-bold">"{searchText}"</span>
+      <Header handleChange={handleChange} isSearchVisible />
+      {console.log(data)}
+      {!isDataAvailable && <Loader />}
+      {isDataAvailable && (
+        <div
+          className={`flex justify-center items-center min-h-screen flex-col w-screen mt-8`}
+        >
+          <div>
+            {searchText && (
+              <div
+                className={`${
+                  mode === "dark" ? "text-white" : ""
+                } text-4xl font-medium min-w-[1100px] mx-auto py-8`}
+              >
+                Search results for{" "}
+                <span className="font-bold">"{searchText}"</span>
+                {/* <span className="block bg-gray-200 rounded px-3 py-1 text-sm font-medium w-[95px] text-gray-700 mr-2 mb-2 mt-4">
+                {data?.catalogue?.providers?.items?.length} courses
+              </span> */}
+              </div>
+            )}
           </div>
-        )}
-      </Row>
-      <div
-        style={{ backgroundColor: "#f7f7f7", minHeight: "90vh" }}
-        className="p-3"
-      >
-        <Row>
-          <Col xs={3}>
-            <Filters applyFilter={setFilters} mode={mode} />
-          </Col>
 
-          {/* {isDataAvailable && ( */}
-          {true && (
-            <Col>
-              <Row>
-                {!loading && (
-                  <div
-                    className={`
-                  font-medium mb-3`}
-                  >
-                    Showing &nbsp;
-                    <span className="font-bold">
-                      {dataToDisplay?.length} courses
-                    </span>
-                  </div>
-                )}
-              </Row>
-              <Row>
-                {dataToDisplay.length === 0 && !loading && (
-                  <NoCourseAvailable />
-                )}
+          <div className="lg:grid lg:grid-cols-4 lg:gap-4 lg:max-w-[1100px] lg:mx-auto lg:mt-5 sm:m-8">
+            <div className="col-span-1">
+              <Filters applyFilter={setFilters} mode={mode} />
+            </div>
 
-                {loading ? (
-                  <>
-                    <CourseShimmer />
-                  </>
-                ) : dataToDisplay.length > 0 ? (
-                  map(dataToDisplay, (course: any) => (
-                    <CourseCard course={course} />
-                  ))
-                ) : null}
-              </Row>
-            </Col>
-          )}
-        </Row>
-      </div>
+            <div className="col-span-3">
+              {!loading && (
+                <div
+                  className={`${
+                    mode === "dark" ? "text-white" : ""
+                  } font-medium mb-3`}
+                >
+                  Showing &nbsp;
+                  <span className="font-bold">
+                    {dataToDisplay?.length} courses
+                  </span>
+                </div>
+              )}
+              {dataToDisplay.length === 0 && <NoCourseAvailable /> }
+              {dataToDisplay ? (
+                map(dataToDisplay, (course: any) => (
+                  <CourseCard course={course} />
+                ))
+              ) : loading ? (
+                <>Loading...</>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

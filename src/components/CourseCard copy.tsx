@@ -5,9 +5,8 @@ import { CourseType } from "../types/courses";
 import Rating from "./Ratings";
 
 const CourseCard: FC<{ course: CourseType }> = ({ course }) => {
-  console.log("mnop:",{course})
   const imageUrl = useMemo(
-    () => course?.descriptor?.images?.[0]?.url ?? Books,
+    () => course?.descriptor?.images?.[0] ?? Books,
     [course, Books]
   );
 

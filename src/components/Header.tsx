@@ -8,7 +8,7 @@ const Header: FC<{
   handleChange?: (ev: any) => void;
 }> = ({ isSearchVisible = false, handleChange }) => {
   return (
-    <Navbar fluid={true} rounded={true} style={{ background: "#149BFC" }}>
+    <Navbar fluid={true}  style={{ background: "#149BFC" }}>
       <LinkContainer to={`/`} style={{ cursor: "pointer" }}>
         <Navbar.Brand href="#">
           <img

@@ -22,7 +22,8 @@ export const courseSlice = createSlice({
 		setCourses:(state, {payload}) => {
 			console.log("vvvv: payload",{payload:cloneDeep(payload)});
 			state.isFetching = false;
-			state.courses=payload.catalogue
+			//state.courses=payload.catalogue
+			state.courses=payload.catalog
             return state;
 		}
 		
