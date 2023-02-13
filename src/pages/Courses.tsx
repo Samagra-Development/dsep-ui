@@ -5,11 +5,11 @@ import CourseCard from "../components/CourseCard";
 import Filters from "../components/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { coursesSelector, setCourses } from "../store/slices/coursesSlice";
-import Header from "../components/Header";
 import NoCourseAvailable from "../components/NoCourseAvailable";
 import { Row, Col, Container } from "react-bootstrap";
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
 import NewHeader from "../components/NewHeader";
+//@ts-ignore
 import CourseShimmer from "../components/CourseShimmer";
 const Courses = (props: any) => {
   const { socket, mode } = props;
@@ -111,7 +111,7 @@ const Courses = (props: any) => {
 
           {/* {isDataAvailable && ( */}
           {true && (
-            <Col>
+            <Col xs={9}>
               <Row>
                 {!loading && (
                   <div
@@ -135,10 +135,12 @@ const Courses = (props: any) => {
                     <CourseShimmer />
                   </>
                 ) : dataToDisplay.length > 0 ? (
-                  map(dataToDisplay, (course: any) => (
+                  <Row>
+                {  map(dataToDisplay, (course: any) => (
                     <CourseCard course={course} />
-                  ))
+                  ))} </Row>
                 ) : null}
+                
               </Row>
             </Col>
           )}

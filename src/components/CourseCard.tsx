@@ -3,60 +3,90 @@ import Books from "../assets/images/books.jpg";
 import { LinkContainer } from "react-router-bootstrap";
 import { CourseType } from "../types/courses";
 import Rating from "./Ratings";
-
+import { Button, Card, Col, Row } from "react-bootstrap";
+import { find } from "lodash";
+import { FaBookmark, FaCalendar ,FaCreditCard,FaEye,FaUser} from "react-icons/fa";
+import { BiListPlus} from "react-icons/bi";
+import moment from "moment";
 const CourseCard: FC<{ course: CourseType }> = ({ course }) => {
-  console.log("mnop:",{course})
+
   const imageUrl = useMemo(
     () => course?.descriptor?.images?.[0]?.url ?? Books,
     [course, Books]
   );
 
+  const [offeringInstitue,credits,instructors] = useMemo(
+    () => [
+      find(course?.tags, { name: "offeringInstitue" })?.value,
+      find(course?.tags, { name: "credits" })?.value,
+      find(course?.tags, { name: "instructors" })?.value,
+    ],
+    [course?.tags]
+  );
   return (
-    <LinkContainer to={`/courses/${course?.id}`} style={{ cursor: "pointer" }}>
-      <div className="mb-4">
-        <a
-          href="#"
-          className="flex items-center bg-white rounded-lg shadow-md md:flex-row"
-        >
-          <div className="p-4">
-            <div className="flex">
-              <img
-                className="w-[200px] rounded m-2"
-                src={imageUrl}
-                alt="courseImage"
-              />
-              <div className="flex flex-col justify-between p-4 leading-normal">
-                <h5 className="mb-2 text-xl tracking-tight text-gray-900 font-bold">
-                  {" "}
-                  {course?.descriptor?.name}
-                </h5>
-                <h6 className="font-medium">{course?.tags?.offeringInstitue}</h6>
-                <Rating value={4} size={1} />
-              </div>
-            </div>
-
-              <div className="pt-2 pb-2 font-regular">
-                This course will enlighten the knowledge of atoms and molecules
-                and build up the pre-requisite knowledge for all science and
-                engineering fields.
-              </div>
-          </div>
-          <div className="w-[2px] h-[200px] bg-[#ECEDEC]"></div>
-          <div className="ml-2 pt-4 pb-2 flex-col w-[250px]">
-            <span
-              className="inline-block bg-red-200 rounded-full px-3 py-1 text-sm text-red-700 mr-2 mb-2 font-medium break-keep"
-              onClick={(ev) => ev.preventDefault()}
+    <LinkContainer
+      to={`/courses/${course?.id}`}
+      style={{ cursor: "pointer", marginBottom: "10px" }}
+    >
+      <Card className="p-2">
+        <Row>
+          <Col>
+            <Row>
+              <Col xs={3}>
+                <Card.Img src={imageUrl} />
+              </Col>
+              <Col xs={7}>
+                <Row>
+                  <h6>{offeringInstitue}</h6>
+                </Row>
+                <Row>
+                  <strong>
+                     {course?.descriptor?.name}
+                  </strong>
+                </Row>
+                <Row>
+                  <Rating value={4} size={1} />
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={10}>
+                {" "}
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Dolores, tempore accusantium. Itaque tempora perferendis iusto
+                cupiditate officia sapiente in magni?
+              </Col>
+            </Row>
+            <Row className="mt-2">
+              <Col>
+              <FaBookmark color="blue" style={{fontSize:'23px',marginRight:'15px'}}/>
+              <Button variant="outline-secondary" size="sm" style={{marginRight:'15px'}}> <BiListPlus style={{fontSize:'23px'}}/> Add to List</Button>
+              <Button variant="outline-secondary"  size="sm"><FaEye style={{fontSize:'18px'}}/> Quick View</Button>
+              </Col>
+            </Row>
+          </Col>
+         
+            <Col
+              xs={3}
+              style={{ borderLeft: "1px solid lightgray" }}
+              className="p-2 container-fluid"
             >
-              {course?.category_id.replace(/_/g, ' ')}
-            </span>
-
-            <span className="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-medium text-green-700 mr-2 mb-2">
-              {course?.price?.value} {course?.price?.currency}
-            </span>
-          </div>
-        </a>
-      </div>
-
+              <div
+                style={{ borderBottom: "1px solid lightgray" }}
+                className="py-1"
+              >
+                <FaCreditCard /> <span style={{fontSize:'12px',color:'gray'}}> Credits :{credits}</span>
+               </div>
+              <div style={{ borderBottom: "1px solid lightgray" }} className="py-2">
+              <FaCalendar /> <span style={{fontSize:'12px',color:'gray'}}> {moment(course?.time?.range?.start).format('Do MMM, YYYY')}</span>
+              </div>
+              <div>
+                <FaUser />  <span style={{fontSize:'12px',color:'gray'}}>{instructors}</span>
+              </div>
+            
+          </Col>
+        </Row>
+      </Card>
     </LinkContainer>
   );
 };

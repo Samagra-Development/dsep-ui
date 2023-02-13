@@ -21,13 +21,7 @@ export type CourseType={
         }
     },
     "rating": string,
-    "tags": {
-        "credits": string | number,
-        "instructors": string,
-        "offeringInstitue": string,
-        "url": string,
-        "enrollmentEndDate": string
-    },
+    "tags": Array<Record<string,string>>,
     "rateable": boolean
 
 }
