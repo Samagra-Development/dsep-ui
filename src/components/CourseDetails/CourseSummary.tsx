@@ -10,7 +10,6 @@ import moment from "moment";
 
 const CourseSummary: FC<{ course: CourseType }> = ({ course }) => {
   const [open, setOpen] = useState(false);
-  console.log("course:", { course });
   const startDate = useGetFormatedDate(course?.time?.range?.start);
   const endDate = useGetFormatedDate(course?.time?.range?.end);
 
@@ -21,7 +20,7 @@ const CourseSummary: FC<{ course: CourseType }> = ({ course }) => {
 
   const haveVideo = useMemo(() => false, []);
 
-  const [credits, courseUrl, enrollementEndDate] = useMemo(
+  const [ courseUrl, enrollementEndDate] = useMemo(
     () => [
       find(course?.tags, { name: "credits" })?.value,
       find(course?.tags, { name: "url" })?.value,

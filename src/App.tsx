@@ -5,6 +5,7 @@ import io from "socket.io-client";
 import Login from "./pages/Login";
 import Courses from "./pages/Courses";
 import CourseDetails from './pages/CourseDetails';
+import MyCourses from './pages/MyCourses';
 
 const socket = io("https://api.dsep.samagra.io");
 // const socket = io("http://localhost:3000");
@@ -35,6 +36,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login socket={socket} />} />
           <Route path="/courses"  element={<Courses mode={theme} socket={socket} />} />
+          <Route path="/my_courses"  element={<MyCourses mode={theme} socket={socket} />} />
           <Route path="/courses/:id" element={<CourseDetails mode={theme} socket={socket} />} />
         </Routes>
       </div>

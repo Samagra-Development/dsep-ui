@@ -1,5 +1,6 @@
 import { map } from 'lodash';
 import React from 'react'
+//@ts-ignore
 import { ShimmerContentBlock } from "shimmer-react";
 const CourseShimmer = () => {
   return (

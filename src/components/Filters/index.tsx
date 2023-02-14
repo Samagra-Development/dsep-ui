@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { Col, Row } from "react-bootstrap";
-import { HiAdjustmentsHorizontal } from "react-icons/hi2";
+import { TbSortDescending } from "react-icons/tb";
 import CourseFilters from "../CourseFilters";
 
 const Filters: FC<{ applyFilter: any; mode: any }> = ({
@@ -18,11 +17,11 @@ const Filters: FC<{ applyFilter: any; mode: any }> = ({
   return (
     <>
    
-    <div className="">
-       <div onClick={handleFilter} className={`font-medium flex items-center gap-2 mb-3 border max-w-fit px-2 rounded-lg bg-[#DADBE0] cursor-pointer`}>
-        <HiAdjustmentsHorizontal />
+    <div className="bg-white">
+       <div onClick={handleFilter} className={`font-medium flex items-center mb-3 pt-3 px-2 rounded-lg  cursor-pointer`}>
+       <TbSortDescending style={{fontSize:'22px'}}/> &nbsp; Filter By
         <div className={``}>
-          Filter By
+          
         </div>
       </div>
       <div id='filterDiv' className="lg:block hidden">

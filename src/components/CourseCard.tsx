@@ -8,7 +8,7 @@ import { find } from "lodash";
 import { FaBookmark, FaCalendar ,FaCreditCard,FaEye,FaUser} from "react-icons/fa";
 import { BiListPlus} from "react-icons/bi";
 import moment from "moment";
-const CourseCard: FC<{ course: CourseType }> = ({ course }) => {
+const CourseCard: FC<{ course: CourseType;isMyCourse?:boolean }> = ({ course,isMyCourse }) => {
 
   const imageUrl = useMemo(
     () => course?.descriptor?.images?.[0]?.url ?? Books,
@@ -57,13 +57,24 @@ const CourseCard: FC<{ course: CourseType }> = ({ course }) => {
                 cupiditate officia sapiente in magni?
               </Col>
             </Row>
-            <Row className="mt-2">
-              <Col>
-              <FaBookmark color="blue" style={{fontSize:'23px',marginRight:'15px'}}/>
-              <Button variant="outline-secondary" size="sm" style={{marginRight:'15px'}}> <BiListPlus style={{fontSize:'23px'}}/> Add to List</Button>
-              <Button variant="outline-secondary"  size="sm"><FaEye style={{fontSize:'18px'}}/> Quick View</Button>
-              </Col>
-            </Row>
+            {isMyCourse ? (<Row className="mt-2">
+               <Col>
+               
+               <Button variant="outline-danger" size="sm"  style={{borderTopRightRadius:'20px',borderTopLeftRadius:'20px',borderBottomRightRadius:'20px',borderBottomLeftRadius:'20px',marginRight:'15px'}}> Svayam - NCERT</Button>
+               <Button variant="outline-success" size="sm"  style={{borderTopRightRadius:'20px',borderTopLeftRadius:'20px',borderBottomRightRadius:'20px',borderBottomLeftRadius:'20px',marginRight:'15px'}}> 0 INR</Button>
+               <Button variant="outline-primary" size="sm"  style={{borderTopRightRadius:'20px',borderTopLeftRadius:'20px',borderBottomRightRadius:'20px',borderBottomLeftRadius:'20px',marginRight:'15px'}}> Start Course</Button>
+ 
+               </Col>
+             </Row>):(
+               <Row className="mt-2">
+               <Col>
+               <FaBookmark color="blue" style={{fontSize:'23px',marginRight:'15px'}}/>
+               <Button variant="outline-secondary" size="sm" style={{marginRight:'15px'}}> <BiListPlus style={{fontSize:'23px'}}/> Add to List</Button>
+               <Button variant="outline-secondary"  size="sm"><FaEye style={{fontSize:'18px'}}/> Quick View</Button>
+               </Col>
+             </Row>
+            )}
+           
           </Col>
          
             <Col
