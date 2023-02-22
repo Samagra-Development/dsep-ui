@@ -11,8 +11,6 @@ const AapplicationId = "a6a2fa97-22bc-4f8d-8190-943b12e0db1b";
 
  
 const Home = (props: any) => {
-  const [loginId, setLoginId] = useState('dsep-user');
-  const [password, setPassword] = useState('dsep-user');
   const socket = props.socket;
   const navigate = useNavigate();
   const FILTERS = [
@@ -93,7 +91,7 @@ const Home = (props: any) => {
          // toast.error(err.message);
         });
     },
-    [loginId, password,dispatch]
+    [dispatch]
   );
 
   console.log("mnop:",{filters})
