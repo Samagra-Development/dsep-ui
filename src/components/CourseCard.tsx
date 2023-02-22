@@ -4,24 +4,25 @@ import { LinkContainer } from "react-router-bootstrap";
 import { CourseType } from "../types/courses";
 import Rating from "./Ratings";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { find } from "lodash";
+import { find, map } from "lodash";
 import { FaBookmark, FaCalendar ,FaCreditCard,FaEye,FaUser} from "react-icons/fa";
 import { BiListPlus} from "react-icons/bi";
 import moment from "moment";
 const CourseCard: FC<{ course: CourseType;isMyCourse?:boolean }> = ({ course,isMyCourse }) => {
-
+console.log("mnop:",{course})
   const imageUrl = useMemo(
     () => course?.descriptor?.images?.[0]?.url ?? Books,
     [course, Books]
   );
 
+  const normalisedTags = useMemo(() => map(course?.tags[0]?.list, (tag) => ({ name: tag?.descriptor?.name, value: tag?.value })), [course])
   const [offeringInstitue,credits,instructors] = useMemo(
     () => [
-      find(course?.tags, { name: "offeringInstitue" })?.value,
-      find(course?.tags, { name: "credits" })?.value,
-      find(course?.tags, { name: "instructors" })?.value,
+      find(normalisedTags, { name: "offeringInstitue" })?.value,
+      find(normalisedTags, { name: "credits" })?.value,
+      find(normalisedTags, { name: "instructors" })?.value,
     ],
-    [course?.tags]
+    [normalisedTags]
   );
   return (
     <LinkContainer
