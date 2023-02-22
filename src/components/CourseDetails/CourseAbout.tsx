@@ -3,7 +3,7 @@ import { CourseType } from "../../types/courses";
 import DetailsHeader from "./DetailsHeader";
 import Books from "../../assets/images/books.jpg";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import { find } from "lodash";
+import { find, map } from "lodash";
 import Rating from "../Ratings";
 
 const CourseAbout: FC<{ course: CourseType }> = ({ course }) => {
@@ -12,13 +12,13 @@ const CourseAbout: FC<{ course: CourseType }> = ({ course }) => {
     () => course?.descriptor?.images?.[0]?.url ?? Books,
     [course, Books]
   );
-
+  const normalisedTags = useMemo(() => map(course?.tags[0]?.list, (tag) => ({ name: tag?.descriptor?.name, value: tag?.value })), [course])
   const [offeringInstitue, instructors] = useMemo(
     () => [
-      find(course?.tags, { name: "offeringInstitue" })?.value,
-      find(course?.tags, { name: "instructors" })?.value,
+      find(normalisedTags, { name: "offeringInstitue" })?.value,
+      find(normalisedTags, { name: "instructors" })?.value,
     ],
-    [course?.tags]
+    [normalisedTags]
   );
 
   return (
