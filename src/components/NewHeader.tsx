@@ -22,7 +22,7 @@ const Header: FC<{
           </LinkContainer>
           <Nav className="me-auto">
             <Nav.Link href="/" className="text-white"> <FaHome /> Home</Nav.Link>
-            <Nav.Link href="/my_courses" className="text-white"><FaGratipay /> My Courses</Nav.Link>
+            {/* <Nav.Link href="/my_courses" className="text-white"><FaGratipay /> My Courses</Nav.Link> */}
             
           </Nav>
           <Nav
