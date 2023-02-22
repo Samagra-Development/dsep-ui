@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Courses from "./pages/Courses";
 import CourseDetails from './pages/CourseDetails';
 import MyCourses from './pages/MyCourses';
-
+import { Toaster } from "react-hot-toast";
 const socket = io("https://api.dsep.samagra.io");
 // const socket = io("http://localhost:3000");
 
@@ -39,6 +39,7 @@ function App() {
           <Route path="/my_courses"  element={<MyCourses mode={theme} socket={socket} />} />
           <Route path="/courses/:id" element={<CourseDetails mode={theme} socket={socket} />} />
         </Routes>
+        <Toaster />
       </div>
     </Router>
   );

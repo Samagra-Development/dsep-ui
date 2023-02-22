@@ -6,6 +6,7 @@ import LoginIllustration from "../assets/images/cuatelanding.svg";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/slices/userSlice";
+import { toast } from "react-hot-toast";
 const AapplicationId = "a6a2fa97-22bc-4f8d-8190-943b12e0db1b";
 
 
@@ -88,11 +89,16 @@ const Home = (props: any) => {
           }
         })
         .catch((err) => {
-         // toast.error(err.message);
+         toast.error(err.message);
         });
     },
     [dispatch]
   );
+
+  const handleAnonymously=useCallback(()=>{
+    props.socket.emit("search", filters);
+    navigate("/courses");
+  },[]);
 
   console.log("mnop:",{filters})
   return (
@@ -155,7 +161,6 @@ const Home = (props: any) => {
 
               <Row>
                 <Col>
-                  {" "}
                   <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Remember for 14 days" />
                   </Form.Group>
@@ -170,6 +175,18 @@ const Home = (props: any) => {
                     onClick={handleSubmit}
                   >
                     Sign In
+                  </Button>
+                </div>
+              </Row>
+              <Row className="mt-3">
+                <div className="d-grid gap-2">
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    type="submit"
+                    onClick={handleAnonymously}
+                  >
+                    Browse Anonymously
                   </Button>
                 </div>
               </Row>
