@@ -1,10 +1,18 @@
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import HomeIllustartion from "../assets/images/illustration.svg";
 import LoginIllustration from "../assets/images/cuatelanding.svg";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/slices/userSlice";
+const AapplicationId = "a6a2fa97-22bc-4f8d-8190-943b12e0db1b";
 
+
+ 
 const Home = (props: any) => {
+  const [loginId, setLoginId] = useState('dsep-user');
+  const [password, setPassword] = useState('dsep-user');
   const socket = props.socket;
   const navigate = useNavigate();
   const FILTERS = [
@@ -24,8 +32,9 @@ const Home = (props: any) => {
     // "seller_email",
   ];
 
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({Password:'dsep-user',Username:'dsep-user'});
   const [connected, setIsConnected] = useState<boolean>(false);
+  const dispatch=useDispatch();
   useEffect(() => {
     socket.on("connect", () => {
       console.log("socket connected");
@@ -43,10 +52,51 @@ const Home = (props: any) => {
     };
   }, []);
 
-  const handleSubmit = () => {
-    props.socket.emit("search", filters);
-    navigate("/courses");
-  };
+  const navigateTo = useNavigate();
+  // //@ts-ignore
+  // const setUser = useZustandStore((state: StoreStateType) => state.setUser);
+
+  useEffect(() => {
+    if (localStorage.getItem('token') && localStorage.getItem('user') ) {    
+      //@ts-ignore  
+      dispatch(setUser(JSON.parse(localStorage.getItem('user'))));
+      navigateTo("/courses");
+    } 
+  }, [dispatch])
+  
+  
+
+  const handleSubmit =  useCallback(
+    (e: SyntheticEvent) => {
+      e.preventDefault();
+     
+      const url = `https://auth.konnect.samagra.io/api/login`;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `HZmKaLCvHMJ36eChXdSpdT7IMqKXr-3rpldpCTmwBJxKFKDf-1h31QwN`,
+        },
+      };
+
+      axios
+        .post(url, { loginId:filters?.Username, password:filters?.Password, applicationId: AapplicationId }, config)
+        .then((res) => {
+          if (res?.data?.token) {
+            localStorage.setItem("token", res?.data?.token);
+            localStorage.setItem("user", JSON.stringify(res?.data));
+            dispatch(setUser(res?.data));
+            props.socket.emit("search", filters);
+            navigate("/courses");
+          }
+        })
+        .catch((err) => {
+         // toast.error(err.message);
+        });
+    },
+    [loginId, password,dispatch]
+  );
+
+  console.log("mnop:",{filters})
   return (
     <Container>
       <Row>
@@ -90,9 +140,11 @@ const Home = (props: any) => {
                     >
                       <Form.Label>{filter}</Form.Label>
                       <Form.Control
-                        type="password"
+                        type="text"
                         placeholder={`Enter your ${filter}`}
                         name={filter}
+                        //@ts-ignore
+                        value={filters?.[filter]}
                         onChange={(e) => {
                           setFilters({ ...filters, [filter]: e.target.value });
                           console.log("filters: ", filters);
