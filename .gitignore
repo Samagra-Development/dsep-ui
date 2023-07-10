@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .turbo
+
+# Cypress
+apps/client/cypress/videos
+apps/client/cypress/screenshots
