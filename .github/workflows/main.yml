@@ -1,0 +1,29 @@
+name: Build and Run Tests
+
+on: [push, pull_request]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: |
+          npm install -g yarn
+          yarn install --w
+      - name: Install dependencies
+        run: |
+          yarn workspace dsep-ui install
+          yarn workspace client-proxy install
+      - name: Run Tests
+        run: yarn workspaces run test
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Cypress screenshots
+          path: app/client/cypress/screenshots
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Cypress Videos
+          path: app.client/cypress/videos
