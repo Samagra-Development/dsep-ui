@@ -9,8 +9,6 @@ import { setUser } from "../store/slices/userSlice";
 import { toast } from "react-hot-toast";
 const AapplicationId = "a6a2fa97-22bc-4f8d-8190-943b12e0db1b";
 
-
- 
 const Home = (props: any) => {
   const socket = props.socket;
   const navigate = useNavigate();
@@ -31,9 +29,12 @@ const Home = (props: any) => {
     // "seller_email",
   ];
 
-  const [filters, setFilters] = useState({Password:'dsep-user',Username:'dsep-user'});
+  const [filters, setFilters] = useState({
+    Password: "dsep-user",
+    Username: "dsep-user",
+  });
   const [connected, setIsConnected] = useState<boolean>(false);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
     socket.on("connect", () => {
       console.log("socket connected");
@@ -56,19 +57,17 @@ const Home = (props: any) => {
   // const setUser = useZustandStore((state: StoreStateType) => state.setUser);
 
   useEffect(() => {
-    if (localStorage.getItem('token') && localStorage.getItem('user') ) {    
-      //@ts-ignore  
-      dispatch(setUser(JSON.parse(localStorage.getItem('user'))));
+    if (localStorage.getItem("token") && localStorage.getItem("user")) {
+      //@ts-ignore
+      dispatch(setUser(JSON.parse(localStorage.getItem("user"))));
       navigateTo("/courses");
-    } 
-  }, [dispatch])
-  
-  
+    }
+  }, [dispatch]);
 
-  const handleSubmit =  useCallback(
+  const handleSubmit = useCallback(
     (e: SyntheticEvent) => {
       e.preventDefault();
-     
+
       const url = `https://auth.konnect.samagra.io/api/login`;
       const config = {
         headers: {
@@ -78,7 +77,15 @@ const Home = (props: any) => {
       };
 
       axios
-        .post(url, { loginId:filters?.Username, password:filters?.Password, applicationId: AapplicationId }, config)
+        .post(
+          url,
+          {
+            loginId: filters?.Username,
+            password: filters?.Password,
+            applicationId: AapplicationId,
+          },
+          config
+        )
         .then((res) => {
           if (res?.data?.token) {
             localStorage.setItem("token", res?.data?.token);
@@ -89,18 +96,18 @@ const Home = (props: any) => {
           }
         })
         .catch((err) => {
-         toast.error(err.message);
+          toast.error(err.message);
         });
     },
     [dispatch]
   );
 
-  const handleAnonymously=useCallback(()=>{
+  const handleAnonymously = useCallback(() => {
     props.socket.emit("search", filters);
     navigate("/courses");
-  },[]);
+  }, []);
 
-  console.log("mnop:",{filters})
+  console.log("mnop:", { filters });
   return (
     <Container>
       <Row>
