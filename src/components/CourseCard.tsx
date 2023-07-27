@@ -5,18 +5,34 @@ import { CourseType } from "../types/courses";
 import Rating from "./Ratings";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { find, map } from "lodash";
-import { FaBookmark, FaCalendar ,FaCreditCard,FaEye,FaUser} from "react-icons/fa";
-import { BiListPlus} from "react-icons/bi";
+import {
+  FaBookmark,
+  FaCalendar,
+  FaCreditCard,
+  FaEye,
+  FaUser,
+} from "react-icons/fa";
+import { BiListPlus } from "react-icons/bi";
 import moment from "moment";
-const CourseCard: FC<{ course: CourseType;isMyCourse?:boolean }> = ({ course,isMyCourse }) => {
-console.log("mnop:",{course})
+const CourseCard: FC<{ course: CourseType; isMyCourse?: boolean }> = ({
+  course,
+  isMyCourse,
+}) => {
+  console.log("mnop:", { course });
   const imageUrl = useMemo(
     () => course?.descriptor?.images?.[0]?.url ?? Books,
     [course, Books]
   );
 
-  const normalisedTags = useMemo(() => map(course?.tags[0]?.list, (tag) => ({ name: tag?.descriptor?.name, value: tag?.value })), [course])
-  const [offeringInstitue,credits,instructors] = useMemo(
+  const normalisedTags = useMemo(
+    () =>
+      map(course?.tags[0]?.list, (tag) => ({
+        name: tag?.descriptor?.name,
+        value: tag?.value,
+      })),
+    [course]
+  );
+  const [offeringInstitue, credits, instructors] = useMemo(
     () => [
       find(normalisedTags, { name: "offeringInstitue" })?.value,
       find(normalisedTags, { name: "credits" })?.value,
@@ -29,21 +45,19 @@ console.log("mnop:",{course})
       to={`/courses/${course?.id}`}
       style={{ cursor: "pointer", marginBottom: "10px" }}
     >
-      <Card className="p-2">
-        <Row>
+      <Card className="p-2" style={{ cursor: "pointer", position: "relative" }}>
+        <Row className="cardContent">
           <Col>
-            <Row>
-              <Col xs={3}>
-                <Card.Img src={imageUrl} />
+            <Row className="courseTitle">
+              <Col>
+                <img src={imageUrl} className="courseImage" />
               </Col>
-              <Col xs={7}>
+              <Col>
                 <Row>
                   <h6>{offeringInstitue}</h6>
                 </Row>
                 <Row>
-                  <strong>
-                     {course?.descriptor?.name}
-                  </strong>
+                  <strong>{course?.descriptor?.name}</strong>
                 </Row>
                 <Row>
                   <Rating value={4} size={1} />
@@ -58,44 +72,81 @@ console.log("mnop:",{course})
                 cupiditate officia sapiente in magni?
               </Col>
             </Row>
-            {isMyCourse ? (<Row className="mt-2">
-               <Col>
-               
-               <Button variant="outline-danger" size="sm"  style={{borderTopRightRadius:'20px',borderTopLeftRadius:'20px',borderBottomRightRadius:'20px',borderBottomLeftRadius:'20px',marginRight:'15px'}}> Svayam - NCERT</Button>
-               <Button variant="outline-success" size="sm"  style={{borderTopRightRadius:'20px',borderTopLeftRadius:'20px',borderBottomRightRadius:'20px',borderBottomLeftRadius:'20px',marginRight:'15px'}}> 0 INR</Button>
-               <Button variant="outline-primary" size="sm"  style={{borderTopRightRadius:'20px',borderTopLeftRadius:'20px',borderBottomRightRadius:'20px',borderBottomLeftRadius:'20px',marginRight:'15px'}}> Start Course</Button>
- 
-               </Col>
-             </Row>):(
-               <Row className="mt-2">
-               <Col>
-               <FaBookmark color="blue" style={{fontSize:'23px',marginRight:'15px'}}/>
-               <Button variant="outline-secondary" size="sm" style={{marginRight:'15px'}}> <BiListPlus style={{fontSize:'23px'}}/> Add to List</Button>
-               <Button variant="outline-secondary"  size="sm"><FaEye style={{fontSize:'18px'}}/> Quick View</Button>
-               </Col>
-             </Row>
+            {isMyCourse ? (
+              <Row className="mt-2">
+                <Col>
+                  <Button
+                    variant="outline-danger"
+                    size="sm"
+                    style={{
+                      borderTopRightRadius: "20px",
+                      borderTopLeftRadius: "20px",
+                      borderBottomRightRadius: "20px",
+                      borderBottomLeftRadius: "20px",
+                      marginRight: "15px",
+                    }}
+                  >
+                    {" "}
+                    Svayam - NCERT
+                  </Button>
+                  <Button
+                    variant="outline-success"
+                    size="sm"
+                    style={{
+                      borderTopRightRadius: "20px",
+                      borderTopLeftRadius: "20px",
+                      borderBottomRightRadius: "20px",
+                      borderBottomLeftRadius: "20px",
+                      marginRight: "15px",
+                    }}
+                  >
+                    {" "}
+                    0 INR
+                  </Button>
+                  <Button
+                    variant="outline-primary"
+                    size="sm"
+                    style={{
+                      borderTopRightRadius: "20px",
+                      borderTopLeftRadius: "20px",
+                      borderBottomRightRadius: "20px",
+                      borderBottomLeftRadius: "20px",
+                      marginRight: "15px",
+                    }}
+                  >
+                    {" "}
+                    Start Course
+                  </Button>
+                </Col>
+              </Row>
+            ) : (
+              <div className="courseCardActions">
+                <FaBookmark color="blue" style={{ fontSize: "23px" }} />
+                <Button variant="outline-secondary" size="sm">
+                  <BiListPlus style={{ fontSize: "23px" }} /> Add to List
+                </Button>
+                <Button variant="outline-secondary" size="sm">
+                  <FaEye style={{ fontSize: "23px" }} /> Quick View
+                </Button>
+              </div>
             )}
-           
           </Col>
-         
-            <Col
-              xs={3}
-              style={{ borderLeft: "1px solid lightgray" }}
-              className="p-2 container-fluid"
-            >
-              <div
-                style={{ borderBottom: "1px solid lightgray" }}
-                className="py-1"
-              >
-                <FaCreditCard /> <span style={{fontSize:'12px',color:'gray'}}> Credits :{credits}</span>
-               </div>
-              <div style={{ borderBottom: "1px solid lightgray" }} className="py-2">
-              <FaCalendar /> <span style={{fontSize:'12px',color:'gray'}}> {moment(course?.time?.range?.start).format('Do MMM, YYYY')}</span>
-              </div>
-              <div>
-                <FaUser />  <span style={{fontSize:'12px',color:'gray'}}>{instructors}</span>
-              </div>
-            
+
+          <Col className="p-2 courseCardMeta">
+            <div>
+              <FaCreditCard />
+              <span> Credits: {credits}</span>
+            </div>
+            <div>
+              <FaCalendar />
+              <span>
+                {moment(course?.time?.range?.start).format("Do MMM, YYYY")}
+              </span>
+            </div>
+            <div>
+              <FaUser />
+              <span>{instructors}</span>
+            </div>
           </Col>
         </Row>
       </Card>

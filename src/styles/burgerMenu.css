@@ -1,0 +1,117 @@
+.burgerCont {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.burgerWrapper {
+  display: none;
+  transition: all 0.3s;
+  margin-left: 0.75rem;
+}
+
+.burgerWrapper .menu {
+  width: 2.75rem;
+  height: 2.75rem;
+  cursor: pointer;
+  transition: all 0.5s;
+  z-index: 1100;
+  position: relative;
+  background-color: transparent;
+}
+
+.burgerWrapper .menu .menuBarCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 70%;
+  transition: all 0.5s;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.burgerWrapper .menu .menuBarCont .menu_bar1,
+.burgerWrapper .menu .menuBarCont .menu_bar2,
+.burgerWrapper .menu .menuBarCont .menu_bar3 {
+  position: absolute;
+  background-color: #f6f8fe;
+  width: 100%;
+  height: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 0px;
+  transition: all 0.5s;
+  display: inline-block;
+}
+
+.burgerWrapper .menu .menuBarCont .menu_bar1 {
+  width: 50%;
+  transform: translate(-100%, -11.5px);
+  transform-origin: 100% 0;
+}
+
+.burgerWrapper .menu .menuBarCont .menu_bar2 {
+  width: 100%;
+  transform: translate(-50%, 0.4px);
+}
+
+.burgerWrapper .menu .menuBarCont .menu_bar3 {
+  width: 50%;
+  transform: translate(0, 11.5px);
+  transform-origin: 0 100%;
+}
+
+.sidebar {
+  width: 0px;
+  height: 110vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-self: start;
+  gap: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 5.5rem;
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+  background-color: white;
+  overflow-y: scroll;
+  /* translate: 2.5% 2.5%; */
+}
+
+.sidebarel {
+  display: none;
+  z-index: 50;
+  cursor: pointer;
+  color: #1a1a1c;
+  margin-left: 2rem;
+  text-align: left;
+  transition: all 300ms ease-in-out;
+}
+
+.navl {
+  font-size: 1.3rem;
+  color: #1a1a1c;
+  transition: all 300ms ease-in-out;
+  padding: 0.5rem 0.25rem;
+}
+
+.navl:hover {
+  background-color: #e8e8e8;
+  border-left: 0.25rem solid #159bfc;
+}
+
+@media screen and (max-width: 900px) {
+  .burgerCont {
+    display: flex;
+  }
+
+  .burgerWrapper {
+    display: block;
+  }
+}

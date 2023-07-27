@@ -1,0 +1,145 @@
+.courseCont {
+    background-color: #f7f7f7;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.courseWrapper {
+    padding-top: 0.75rem;
+    height: 85vh;
+    position: relative;
+}
+
+.courseCount {
+    width: fit-content;
+    font-size: 1.25rem;
+    font-weight: 700;
+    opacity: 0.8;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.35rem;
+    text-transform: capitalize;
+}
+
+.courseCount span:nth-child(2) {
+    opacity: 1;
+    color: #159bfc;
+}
+
+.courseList {
+    height: 92.5%;
+    overflow: scroll;
+    padding-bottom: 2rem;
+}
+
+.cardContent {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    height: fit-content;
+    position: relative;
+}
+
+.courseTitle {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.courseImage {
+    height: 90px;
+    width: 225px;
+}
+
+.courseCardActions {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+    flex-wrap: wrap-reverse;
+    margin-top: 0.5rem;
+}
+
+.courseCardMeta {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    margin-bottom: 0rem;
+    border-left: 1px solid lightgray;
+    height: 100%;
+}
+
+.courseCardMeta div {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: start;
+    height: fit-content;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: left;
+    margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 400px) {
+    .courseCardActions {
+        gap: 0.25rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .cardContent {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .courseCardMeta {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-bottom: 0.5rem;
+        border-left: none;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .courseCardMeta div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        height: 100%;
+        width: 33%;
+        text-align: center;
+        margin-left: 0rem;
+        margin-bottom: 0rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .courseTitle {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .courseImage {
+        width: fit-content;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .courseCont {
+        padding-left: 1.5rem;
+        padding-top: 0.75rem;
+    }
+}

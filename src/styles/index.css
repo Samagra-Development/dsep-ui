@@ -1,25 +1,33 @@
-
-
 /* Font family */
 @font-face {
   font-family: Mulish-bold;
   src: url("./assets/fonts/Mulish-Bold.ttf");
   font-display: swap;
 }
+
 @font-face {
   font-family: Mulish-demi;
   src: url("./assets/fonts/Mulish-Demi.ttf");
   font-display: swap;
 }
+
 @font-face {
   font-family: Mulish-medium;
   src: url("./assets/fonts/Mulish-Medium.ttf");
   font-display: swap;
 }
+
 @font-face {
   font-family: Mulish-regular;
   src: url("./assets/fonts/Mulish-Regular.ttf");
   font-display: swap;
+}
+
+html,
+body {
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 body {
@@ -28,14 +36,40 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh; */
-  overflow-x: hidden !important;
+  overflow: hidden !important;
 }
+
 body #light {
   background-color: white;
 }
+
 body #dark {
   /* background-color: #041d2f; */
   background-color: white;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+li {
+  list-style: none !important;
+}
+
+
+.navbar-cont {
+  width: 100vw;
+  height: 4rem;
+  background-color: #159bfc;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.dseplogo {
+  font-weight: 700;
+  font-size: 1.75em;
+  color: white;
 }
 
 /* .icons-styling {
@@ -63,7 +97,7 @@ body #dark {
 
 .login-form {
   position: absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

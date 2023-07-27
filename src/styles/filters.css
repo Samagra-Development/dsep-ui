@@ -1,0 +1,36 @@
+.filterWrapper {
+    display: none;
+    padding: none !important;
+}
+
+.filterWrapper .filterContainer {
+    height: 90vh;
+    background-color: #f7f7f7;
+    padding-inline: 1rem;
+}
+
+.burgerFilterWrapper .filterContainer {
+    height: fit-content;
+    background-color: transparent;
+    padding-inline: 1rem;
+}
+
+.filterHeading {
+    margin-block: 0.75rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+    opacity: 0.8;
+}
+
+.filterIcon {
+    font-size: 2rem;
+    font-weight: 900;
+    opacity: 1;
+    padding-bottom: 0.25rem;
+}
+
+@media screen and (min-width: 900px) {
+    .filterWrapper {
+        display: flex;
+    }
+}
