@@ -110,35 +110,23 @@ const Home = (props: any) => {
   console.log("mnop:", { filters });
   return (
     <Container
-      style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        marginInline: "auto",
-        minWidth: "90vw",
-      }}
+      className="login-container"
     >
-      <Row>
+      <Row className="align-items-end">
         <Col xs={12} md={6}>
           <Container
-            className="login-form"
-            style={{
-              minWidth: "20rem",
-              width: "100%", // Set the width to 100% for xs screens
-              maxWidth: "25rem", // Limit the maximum width on larger screens
-            }}
+            className="login-form-container"
           >
             <Row>
               <Col>
                 <p
                   style={{
                     fontWeight: "700",
-                    fontSize: "29px",
+                    fontSize: "1.7rem",
                     color: "#1E293B",
                   }}
                 >
-                  {/* Login to get the courses */}
+                  Login to get the courses
                 </p>
               </Col>
             </Row>
@@ -219,17 +207,12 @@ const Home = (props: any) => {
         <Col
           xs={12}
           md={6}
-          className="d-none d-md-block align-self-center d-flex justify-content-center"
+          className="d-none d-md-block d-flex justify-content-center"
         >
           <Container>
             <Card.Img
+              className="login-illustration"
               src={LoginIllustration}
-              style={{
-                width: "90%",
-                maxWidth: "100%",
-                height: "auto",
-              
-              }}
             />
           </Container>
         </Col>

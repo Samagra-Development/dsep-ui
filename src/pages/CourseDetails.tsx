@@ -37,10 +37,8 @@ const CourseDetails: FC<{ socket: any; mode: any }> = ({ socket, mode }) => {
           <Col md={8}>
             <CourseAbout course={selected} />
           </Col>
-          <Col md={4} className="d-none d-md-block" style={{
-            marginInline:"auto"
-          }}>
-            <div className="" style={{
+          <Col md={4} className="d-none d-md-block mx-auto">
+            <div className="mx-auto" style={{
               width:"15rem",
             }}>
             <CourseSummary course={selected} />
