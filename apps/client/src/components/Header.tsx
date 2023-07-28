@@ -2,6 +2,7 @@ import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { LinkContainer } from "react-router-bootstrap";
 import { FC } from "react";
 import { BsSearch } from "react-icons/bs";
+import Logout from "./Logout";
 
 const Header: FC<{
   isSearchVisible?: boolean;
@@ -43,6 +44,9 @@ const Header: FC<{
           </div>
         )}
       </Navbar.Collapse>
+      <div className="flex items-center justify-end">
+        <Logout />
+      </div>
     </Navbar>
   );
 };
