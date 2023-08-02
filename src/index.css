@@ -61,9 +61,30 @@ body #dark {
   }
 } */
 
-.login-form {
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-inline: auto;
+  min-width: 90vw;
+}
+
+.login-form-container {
+  min-width: 20rem;
+  width: 100%;
+  max-width: 23rem !important;
+}
+
+.login-illustration {
+  width: 90%;
+  max-width: 100%;
+  height: auto;
+  min-width: 20rem;
+}
+
+@media (min-width: 1024px) {
+  .login-form-container {
+    max-width: 25rem !important;
+  }
 }

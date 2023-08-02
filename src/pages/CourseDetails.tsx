@@ -25,28 +25,33 @@ const CourseDetails: FC<{ socket: any; mode: any }> = ({ socket, mode }) => {
     return find(dtp, { id });
   }, [courses, id]);
 
- 
   console.log("bnm:", { selected });
- 
-
 
   return (
-    <div style={{backgroundColor:'white'}}>
+    <div style={{ backgroundColor: "white" }}>
       <Header />
       <Container>
-      <Row className="">
-      <Col xs={8}>
-        <CourseAbout course={selected} />
-        </Col>
-        <Col xs={3}>
-        <CourseSummary course={selected} />
-       
-        </Col>
-        
-     </Row>
+        <Row className="" style={{
+          flexWrap:"nowrap"
+        }}>
+          <Col md={8}>
+            <CourseAbout course={selected} />
+          </Col>
+          <Col md={4} className="d-none d-md-block mx-auto">
+            <div className="mx-auto" style={{
+              width:"15rem",
+            }}>
+            <CourseSummary course={selected} />
+            </div>
+          </Col>
+        </Row>
+
+        <Row className="d-md-none mb-4">
+          <Col xs={12}>
+            <CourseSummary course={selected} />
+          </Col>
+        </Row>
       </Container>
-      
-      
     </div>
   );
 };
