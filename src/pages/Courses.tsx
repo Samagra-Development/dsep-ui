@@ -92,12 +92,12 @@ const Courses = (props: any) => {
         handleChange={handleChange}
         isSearchVisible
       />
-      <Row style={{ background: "#f3f3f8" }}>
+      <Row className="searchDiv">
         {searchText && (
           <div
             className={`text-4xl font-medium min-w-[1100px] mx-auto py-4 px-3 my-3 bg-white`}
           >
-            <span style={{ color: "grey" }}> Search results for </span> &nbsp;
+            <span className={"searchText"}> Search results for </span> &nbsp;
             <span className="font-bold">"{searchText}"</span>
           </div>
         )}

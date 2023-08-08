@@ -1,14 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Menu } from "../../scripts/burgerMenu";
 import Filters from "../Filters";
-
-export const NavItemsData = [
-  {
-    name: "Home",
-    route: "/",
-  },
-];
 
 const Burger: React.FC<{ applyFilter: any; mode: any }> = ({
   applyFilter,
@@ -25,15 +17,6 @@ const Burger: React.FC<{ applyFilter: any; mode: any }> = ({
           </div>
         </div>
         <div className={`sidebar`}>
-          {/* {NavItemsData.map((el: any, i: number) => {
-            return (
-              <li key={i} className={`sidebarel`}>
-                <Link to={el.route}>
-                  <span className={`navl`}>{el.name}</span>
-                </Link>
-              </li>
-            );
-          })} */}
           <div className="burgerFilterWrapper">
             <Filters applyFilter={applyFilter} mode={mode} />
           </div>

@@ -101,3 +101,34 @@ li {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.nav {
+  max-height: 100px !important;
+}
+
+.searchForm {
+  width: 30vw !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.bg-white {
+  background-color: white !important;
+}
+
+.App {
+  min-height: 100vh !important;
+}
+
+.courseAboutText {
+  font-weight: 500;
+  font-size: 14px;
+  color: #606060 !important;
+}
+
+.goToClassButton {
+  border-radius: 20px;
+  background-color: #3849ab;
+}

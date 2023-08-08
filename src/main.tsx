@@ -7,6 +7,7 @@ import "./styles/index.css";
 import "./styles/burgerMenu.css";
 import "./styles/filters.css";
 import "./styles/courses.css";
+import "./styles/search.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

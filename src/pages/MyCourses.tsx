@@ -3,35 +3,27 @@ import { Col, Container, Row } from "react-bootstrap";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import Filters from "../components/Filters";
 import Header from "../components/NewHeader";
-import Shimmer from '../components/CourseShimmer'
+import Shimmer from "../components/CourseShimmer";
 import { map } from "lodash";
 import CourseCard from "../components/CourseCard";
 import axios from "axios";
 const MyCourses: FC<{ mode: string; socket: any }> = ({ mode, socket }) => {
-    const [courses, setCourses] = useState([{}]);
-    const [isLoading, setIsLoading] = useState(true);
+  const [courses, setCourses] = useState([{}]);
+  const [isLoading, setIsLoading] = useState(true);
   const applyFilters = useCallback(() => {}, []);
 
-  useEffect(()=>{
-    setTimeout(()=>setIsLoading(false),3000);
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 3000);
     // axios.get('').then(res=>{})
-  },[])
+  }, []);
   return (
-    <div style={{}}>
+    <div>
       <Header />
       <Container>
         <Row className="mt-5">
           <Col>
-            <FaArrowAltCircleRight style={{ fontSize: "25px" }} /> &nbsp;{" "}
-            <span
-              style={{
-                fontWeight: "700",
-                fontSize: "20px",
-                lineHeight: "50px",
-              }}
-            >
-              My Courses
-            </span>
+            <FaArrowAltCircleRight className={"myCourseIcon"} /> &nbsp;{" "}
+            <span className={"myCourseHead"}>My Courses</span>
           </Col>
         </Row>
         <Row>
@@ -40,9 +32,13 @@ const MyCourses: FC<{ mode: string; socket: any }> = ({ mode, socket }) => {
           </Col>
           <Col xs={9}>
             {isLoading ? (
-                <Shimmer />
-                //@ts-ignore
-            ):(map(courses,(course,index)=>(<CourseCard course={course} key={index} isMyCourse/>)))}
+              <Shimmer />
+            ) : (
+              //@ts-ignore
+              map(courses, (course, index) => (
+                <CourseCard course={course} key={index} isMyCourse />
+              ))
+            )}
           </Col>
         </Row>
       </Container>

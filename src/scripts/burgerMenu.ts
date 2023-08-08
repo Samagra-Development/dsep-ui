@@ -44,7 +44,6 @@ const Menu = () => {
         el.style.display = "flex";
         el.style.opacity = "1";
       }, 100);
-      // el.onclick = () => closeSidebar();
     });
     sidebar.style.width = "min(350px, 100vw)";
     menu.dataset.toggle = "close";

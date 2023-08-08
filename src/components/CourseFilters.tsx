@@ -44,13 +44,6 @@ const CourseFilters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
           <CourseCredits applyFilter={applyFilter} label="Course Credits" />
         ),
       },
-      // {
-      //   key: "Status",
-      //   label: "Course Status",
-      //   value: "",
-      //   items: [],
-      //   component: <CourseStatus applyFilter={applyFilter} />,
-      // },
       {
         key: "Category",
         label: "Course Category",
@@ -66,10 +59,10 @@ const CourseFilters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
 
   return (
     <>
-      {map(courseFilters, (cFilter: any) => (
+      {map(courseFilters, (courseFilter: any) => (
         <div className="filterEl">
-          {cFilter.component && (
-            <div className="pb-3 text-center">{cFilter.component}</div>
+          {courseFilter.component && (
+            <div className="pb-3 text-center">{courseFilter.component}</div>
           )}
         </div>
       ))}

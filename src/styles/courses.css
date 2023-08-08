@@ -36,6 +36,25 @@
     padding-bottom: 2rem;
 }
 
+.courseCardLinkWrapper {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.courseCard {
+    cursor: pointer;
+    position: relative;
+}
+
+.courseCardButtons {
+    margin-right: 15px;
+    border-radius: 20px;
+}
+
+.courseCardFaIconsSize {
+    font-size: 23px;
+}
+
 .cardContent {
     display: flex;
     justify-content: start;
@@ -87,6 +106,16 @@
     width: 100%;
     text-align: left;
     margin-left: 0.5rem;
+}
+
+.myCourseIcon {
+    font-size: 25px;
+}
+
+.myCourseHead {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 50px;
 }
 
 @media screen and (max-width: 400px) {

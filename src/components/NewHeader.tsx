@@ -16,30 +16,16 @@ const Header: FC<{
       <Navbar className="navbar-cont">
         <Burger applyFilter={applyFilter} mode={mode} />
         <Container fluid>
-          <LinkContainer to={`/`} style={{ cursor: "pointer" }}>
+          <LinkContainer to={`/`}>
             <span className="dseplogo">DSEP</span>
           </LinkContainer>
-          {/* <Nav className="me-auto">
-            <Nav.Link href="/" className="text-white">
-              {" "}
-              <FaHome /> Home
-            </Nav.Link>
-            <Nav.Link href="/my_courses" className="text-white">
-              <FaGratipay /> My Courses
-            </Nav.Link>
-          </Nav> */}
-          <Nav
-            className="ms-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
-            <Form className="d-flex ">
+          <Nav className="ms-auto my-2 my-lg-0 nav" navbarScroll>
+            <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="Search"
-                className="me-2"
+                className="me-2 searchForm"
                 aria-label="Search"
-                style={{ width: "30vw" }}
                 onChange={handleChange}
               />
             </Form>

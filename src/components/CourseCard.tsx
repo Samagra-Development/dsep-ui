@@ -14,11 +14,11 @@ import {
 } from "react-icons/fa";
 import { BiListPlus } from "react-icons/bi";
 import moment from "moment";
+
 const CourseCard: FC<{ course: CourseType; isMyCourse?: boolean }> = ({
   course,
   isMyCourse,
 }) => {
-  console.log("mnop:", { course });
   const imageUrl = useMemo(
     () => course?.descriptor?.images?.[0]?.url ?? Books,
     [course, Books]
@@ -41,11 +41,8 @@ const CourseCard: FC<{ course: CourseType; isMyCourse?: boolean }> = ({
     [normalisedTags]
   );
   return (
-    <LinkContainer
-      to={`/courses/${course?.id}`}
-      style={{ cursor: "pointer", marginBottom: "10px" }}
-    >
-      <Card className="p-2" style={{ cursor: "pointer", position: "relative" }}>
+    <LinkContainer to={`/courses/${course?.id}`}>
+      <Card className="p-2 courseCard">
         <Row className="cardContent">
           <Col>
             <Row className="courseTitle">
@@ -78,13 +75,7 @@ const CourseCard: FC<{ course: CourseType; isMyCourse?: boolean }> = ({
                   <Button
                     variant="outline-danger"
                     size="sm"
-                    style={{
-                      borderTopRightRadius: "20px",
-                      borderTopLeftRadius: "20px",
-                      borderBottomRightRadius: "20px",
-                      borderBottomLeftRadius: "20px",
-                      marginRight: "15px",
-                    }}
+                    className={"courseCardButtons"}
                   >
                     {" "}
                     Svayam - NCERT
@@ -92,13 +83,7 @@ const CourseCard: FC<{ course: CourseType; isMyCourse?: boolean }> = ({
                   <Button
                     variant="outline-success"
                     size="sm"
-                    style={{
-                      borderTopRightRadius: "20px",
-                      borderTopLeftRadius: "20px",
-                      borderBottomRightRadius: "20px",
-                      borderBottomLeftRadius: "20px",
-                      marginRight: "15px",
-                    }}
+                    className={"courseCardButtons"}
                   >
                     {" "}
                     0 INR
@@ -106,13 +91,7 @@ const CourseCard: FC<{ course: CourseType; isMyCourse?: boolean }> = ({
                   <Button
                     variant="outline-primary"
                     size="sm"
-                    style={{
-                      borderTopRightRadius: "20px",
-                      borderTopLeftRadius: "20px",
-                      borderBottomRightRadius: "20px",
-                      borderBottomLeftRadius: "20px",
-                      marginRight: "15px",
-                    }}
+                    className={"courseCardButtons"}
                   >
                     {" "}
                     Start Course
@@ -121,12 +100,12 @@ const CourseCard: FC<{ course: CourseType; isMyCourse?: boolean }> = ({
               </Row>
             ) : (
               <div className="courseCardActions">
-                <FaBookmark color="blue" style={{ fontSize: "23px" }} />
+                <FaBookmark color="blue" className={"courseCardFaIconsSize"} />
                 <Button variant="outline-secondary" size="sm">
-                  <BiListPlus style={{ fontSize: "23px" }} /> Add to List
+                  <BiListPlus className={"courseCardFaIconsSize"} /> Add to List
                 </Button>
                 <Button variant="outline-secondary" size="sm">
-                  <FaEye style={{ fontSize: "23px" }} /> Quick View
+                  <FaEye className={"courseCardFaIconsSize"} /> Quick View
                 </Button>
               </div>
             )}
@@ -140,7 +119,9 @@ const CourseCard: FC<{ course: CourseType; isMyCourse?: boolean }> = ({
             <div>
               <FaCalendar />
               <span>
-                {moment(course?.time?.range?.start).format("Do MMM, YYYY")}
+                {moment(course?.time?.range?.start ?? Date.now()).format(
+                  "Do MMM, YYYY"
+                )}
               </span>
             </div>
             <div>

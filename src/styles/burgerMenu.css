@@ -67,7 +67,7 @@
 
 .sidebar {
   width: 0px;
-  height: 110vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -76,7 +76,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  padding-top: 5.5rem;
+  padding-top: 4rem;
   transition: all 0.3s ease-in-out;
   z-index: 1000;
   background-color: white;
