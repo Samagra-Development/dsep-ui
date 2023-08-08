@@ -9,7 +9,7 @@ import NoCourseAvailable from "../components/NoCourseAvailable";
 import { Row, Col, Container } from "react-bootstrap";
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
 import NewHeader from "../components/NewHeader";
-//@ts-ignore
+// @ts-ignore
 import CourseShimmer from "../components/CourseShimmer";
 const Courses = (props: any) => {
   const { socket, mode } = props;
@@ -86,46 +86,40 @@ const Courses = (props: any) => {
   // if (!isDataAvailable) return <Loader />;
   return (
     <>
-      <NewHeader handleChange={handleChange} isSearchVisible />
-      <Row style={{ background: "#f3f3f8" }}>
+      <NewHeader
+        applyFilter={setFilters}
+        mode={mode}
+        handleChange={handleChange}
+        isSearchVisible
+      />
+      <Row className="searchDiv">
         {searchText && (
           <div
-            className={` text-4xl font-medium min-w-[1100px] mx-auto py-4 px-3 my-3 bg-white`}
-            // className={`${
-            //   mode === "dark" ? "text-white" : ""
-            // } text-4xl font-medium min-w-[1100px] mx-auto py-4 px-3 my-3 bg-white`}
+            className={`text-4xl font-medium min-w-[1100px] mx-auto py-4 px-3 my-3 bg-white`}
           >
-            <span style={{ color: "grey" }}> Search results for </span> &nbsp;
+            <span className={"searchText"}> Search results for </span> &nbsp;
             <span className="font-bold">"{searchText}"</span>
           </div>
         )}
       </Row>
-      <div
-        style={{ backgroundColor: "#f7f7f7", minHeight: "90vh" }}
-        className="p-3"
-      >
+      <div className="courseCont">
         <Row>
-          <Col xs={3}>
+          <Col xs={3} className="filterWrapper">
             <Filters applyFilter={setFilters} mode={mode} />
           </Col>
 
           {/* {isDataAvailable && ( */}
           {true && (
-            <Col xs={9}>
+            <Col className="courseWrapper">
               <Row>
                 {!loading && (
-                  <div
-                    className={`
-                  font-medium mb-3`}
-                  >
-                    Showing &nbsp;
-                    <span className="font-bold">
-                      {dataToDisplay?.length} courses
-                    </span>
+                  <div className="courseCount">
+                    <span>Showing</span>
+                    <span>{dataToDisplay?.length} courses</span>
                   </div>
                 )}
               </Row>
-              <Row>
+              <Row className="courseList">
                 {dataToDisplay.length === 0 && !loading && (
                   <NoCourseAvailable />
                 )}
@@ -136,11 +130,11 @@ const Courses = (props: any) => {
                   </>
                 ) : dataToDisplay.length > 0 ? (
                   <Row>
-                {  map(dataToDisplay, (course: any) => (
-                    <CourseCard course={course} />
-                  ))} </Row>
+                    {map(dataToDisplay, (course: any) => (
+                      <CourseCard course={course} />
+                    ))}{" "}
+                  </Row>
                 ) : null}
-                
               </Row>
             </Col>
           )}

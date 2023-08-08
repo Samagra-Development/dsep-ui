@@ -1,4 +1,3 @@
-
 import { useMemo, FC } from "react";
 import { map } from "lodash";
 import NationalCodinator from "./Filters/NationalCodinator";
@@ -15,40 +14,44 @@ const CourseFilters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
         key: "NationalCoordinator",
         label: "National Coordinator",
         value: "",
-        component: <NationalCodinator applyFilter={applyFilter}   label= "National Coordinator"/>,
+        component: (
+          <NationalCodinator
+            applyFilter={applyFilter}
+            label="National Coordinator"
+          />
+        ),
       },
       {
         key: "CourseMode",
         label: "Course Mode",
         value: "",
-        component: <CourseMode applyFilter={applyFilter}  label="Course Mode"/>,
+        component: <CourseMode applyFilter={applyFilter} label="Course Mode" />,
       },
       {
         key: "CourseDuration",
         label: "Course Duration",
         value: "",
-        component: <CourseDuration applyFilter={applyFilter}  label="Course Duration"/>,
+        component: (
+          <CourseDuration applyFilter={applyFilter} label="Course Duration" />
+        ),
       },
       {
         key: "Course Credits",
         label: "Course Credits",
         value: "",
         items: [],
-        component: <CourseCredits applyFilter={applyFilter}  label="Course Credits"/>,
+        component: (
+          <CourseCredits applyFilter={applyFilter} label="Course Credits" />
+        ),
       },
-      // {
-      //   key: "Status",
-      //   label: "Course Status",
-      //   value: "",
-      //   items: [],
-      //   component: <CourseStatus applyFilter={applyFilter} />,
-      // },
       {
         key: "Category",
         label: "Course Category",
         value: "",
         items: [],
-        component: <CourseCategory applyFilter={applyFilter}  label="Course Category"/>,
+        component: (
+          <CourseCategory applyFilter={applyFilter} label="Course Category" />
+        ),
       },
     ],
     []
@@ -56,13 +59,10 @@ const CourseFilters: FC<{ applyFilter: any }> = ({ applyFilter }) => {
 
   return (
     <>
-      {map(courseFilters, (cFilter: any) => (
-        <div className="bg-white">
-          {/* <div className="w-full text-[#000]" style={{ display: "block" }}>
-            {cFilter.label}
-          </div> */}
-          {cFilter.component && (
-            <div className="p-2 text-center">{cFilter.component}</div>
+      {map(courseFilters, (courseFilter: any) => (
+        <div className="filterEl">
+          {courseFilter.component && (
+            <div className="pb-3 text-center">{courseFilter.component}</div>
           )}
         </div>
       ))}
